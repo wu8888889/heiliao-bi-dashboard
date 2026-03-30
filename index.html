@@ -524,7 +524,52 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
     </div>
   </div>
 
-  <div class="footer">品宣部 BI 看板 · 数据来源：Google Sheets · @wulan_agent01_bot</div>
+  <!-- NEW MEDIA -->
+  <div class="section">
+    <div class="stitle"><span class="si">📱</span><span class="st">新媒体数据</span><div class="sl"></div></div>
+    <div class="nmGrid">
+      <div class="nmCard">
+        <div class="nmHdr"><span class="nmIcon">📸</span><span class="nmName">新媒体一组</span><span class="nmMgr">肖田</span>
+          <select class="nm-sel" id="nm1Sel" onchange="updateNM()" style="margin-left:auto">
+            <option value="week">本周</option><option value="lastweek">对比上周</option><option value="month">本月</option><option value="today">今日</option>
+          </select>
+        </div>
+        <div class="nmBody">
+          <div class="nm-metrics" id="nm1m">
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" id="nm1-pub">48篇</span><span class="trend up" id="nm1-pt">+12</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">粉丝</span><span class="nmm-val" id="nm1-fan">12.6万</span><span class="trend up" id="nm1-ft">+2100</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val" id="nm1-int">3.2万</span><span class="trend up" id="nm1-it">+3200</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">点赞率</span><span class="nmm-val" id="nm1-lik">6.8%</span><span class="trend up" id="nm1-lt">+0.5%</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">完播率</span><span class="nmm-val" id="nm1-viw">52%</span><span class="trend down" id="nm1-vt">-2%</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">转化率</span><span class="nmm-val" id="nm1-cnv">3.4%</span><span class="trend up" id="nm1-ct">+0.3%</span></div>
+          </div>
+          <div class="nmchart-wrap"><canvas id="nmChart1"></canvas></div>
+        </div>
+      </div>
+      <div class="nmCard">
+        <div class="nmHdr"><span class="nmIcon">🎙️</span><span class="nmName">新媒体二组</span><span class="nmMgr">巧言</span>
+          <select class="nm-sel" id="nm2Sel" onchange="updateNM()" style="margin-left:auto">
+            <option value="week">本周</option><option value="lastweek">对比上周</option><option value="month">本月</option><option value="today">今日</option>
+          </select>
+        </div>
+        <div class="nmBody">
+          <div class="nm-metrics" id="nm2m">
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" id="nm2-pub">36篇</span><span class="trend up" id="nm2-pt">+8</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">粉丝</span><span class="nmm-val" id="nm2-fan">9.8万</span><span class="trend up" id="nm2-ft">+1600</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val" id="nm2-int">2.7万</span><span class="trend up" id="nm2-it">+1800</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">点赞率</span><span class="nmm-val" id="nm2-lik">5.9%</span><span class="trend up" id="nm2-lt">+0.3%</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">完播率</span><span class="nmm-val" id="nm2-viw">48%</span><span class="trend up" id="nm2-vt">+1%</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">转化率</span><span class="nmm-val" id="nm2-cnv">2.8%</span><span class="trend down" id="nm2-ct">-0.2%</span></div>
+          </div>
+          <div class="nmchart-wrap"><canvas id="nmChart2"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">品宣部 BI 看板 · 数据来源：Google Sheets · @wulan_agent01_bot</div>
 
 <script>
 (function(){
@@ -580,67 +625,7 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
   }
   window.updatePlan=updatePlan;updatePlan();
 
-  // New media data
-  var nmD={
-    week:{
-      n1:{p:'48篇',pt:'+12',f:'12.6万',ft:'+2100',i:'3.2万',it:'+3200',l:'6.8%',lt:'+0.5%',v:'52%',vt:'-2%',c:'3.4%',ct:'+0.3%',d:[12,15,8,11,16,10,14]},
-      n2:{p:'36篇',pt:'+8',f:'9.8万',ft:'+1600',i:'2.7万',it:'+1800',l:'5.9%',lt:'+0.3%',v:'48%',vt:'+1%',c:'2.8%',ct:'-0.2%',d:[8,10,6,9,12,7,11]}
-    },
-    lastweek:{
-      n1:{p:'36篇',pt:'-4',f:'12.4万',ft:'+800',i:'2.9万',it:'-500',l:'6.3%',lt:'-0.2%',v:'54%',vt:'+3%',c:'3.1%',ct:'-0.1%',d:[9,11,7,8,12,9,8]},
-      n2:{p:'28篇',pt:'-3',f:'9.6万',ft:'+1200',i:'2.5万',it:'-300',l:'5.6%',lt:'-0.1%',v:'47%',vt:'-2%',c:'3.0%',ct:'+0.1%',d:[6,8,5,7,9,6,7]}
-    },
-    month:{
-      n1:{p:'186篇',pt:'+24',f:'14.2万',ft:'+8200',i:'12.8万',it:'+12800',l:'7.1%',lt:'+1.2%',v:'55%',vt:'-3%',c:'3.6%',ct:'+0.8%',d:[22,28,30,25,32,28,26]},
-      n2:{p:'142篇',pt:'+18',f:'10.8万',ft:'+5600',i:'10.2万',it:'+9200',l:'6.2%',lt:'+0.8%',v:'50%',vt:'+2%',c:'2.9%',ct:'-0.3%',d:[18,22,24,20,28,24,22]}
-    },
-    today:{
-      n1:{p:'8篇',pt:'+2',f:'12.61万',ft:'+120',i:'5200',it:'+800',l:'7.2%',lt:'+0.8%',v:'58%',vt:'+3%',c:'3.8%',ct:'+0.2%',d:[8]},
-      n2:{p:'6篇',pt:'+1',f:'9.81万',ft:'+90',i:'4100',it:'+600',l:'6.1%',lt:'+0.4%',v:'52%',vt:'+2%',c:'3.0%',ct:'-0.1%',d:[6]}
-    }
-  };
 
-  function setNM(id,src){
-    document.getElementById(id+'-pub').textContent=src.p;
-    var pt=document.getElementById(id+'-pt');pt.textContent=src.pt;pt.className='trend '+(src.pt.indexOf('-')===0?'down':'up');
-    document.getElementById(id+'-fan').textContent=src.f;
-    var ft=document.getElementById(id+'-ft');ft.textContent=src.ft;ft.className='trend '+(src.ft.indexOf('-')===0?'down':'up');
-    document.getElementById(id+'-int').textContent=src.i;
-    var it=document.getElementById(id+'-it');it.textContent=src.it;it.className='trend '+(src.it.indexOf('-')===0?'down':'up');
-    document.getElementById(id+'-lik').textContent=src.l;
-    var lt=document.getElementById(id+'-lt');lt.textContent=src.lt;lt.className='trend '+(src.lt.indexOf('-')===0?'down':'up');
-    document.getElementById(id+'-viw').textContent=src.v;
-    var vt=document.getElementById(id+'-vt');vt.textContent=src.vt;vt.className='trend '+(src.vt.indexOf('-')===0?'down':'up');
-    document.getElementById(id+'-cnv').textContent=src.c;
-    var ct=document.getElementById(id+'-ct');ct.textContent=src.ct;ct.className='trend '+(src.ct.indexOf('-')===0?'down':'up');
-  }
-
-  var nmC1,nmC2;
-  function updateNM(){
-    var p1=document.getElementById('nm1Sel').value;
-    var p2=document.getElementById('nm2Sel').value;
-    setNM('nm1',nmD[p1].n1);
-    setNM('nm2',nmD[p2].n2);
-    var lbl=['周一','周二','周三','周四','周五','周六','周日'];
-    if(nmC1){nmC1.data.labels=lbl;nmC1.data.datasets[0].data=nmD[p1].n1.d;nmC1.update();}
-    if(nmC2){nmC2.data.labels=lbl;nmC2.data.datasets[0].data=nmD[p2].n2.d;nmC2.update();}
-  }
-  window.updateNM=updateNM;
-
-  nmC1=new Chart(document.getElementById('nmChart1'),{
-    type:'bar',
-    data:{labels:['周一','周二','周三','周四','周五','周六','周日'],datasets:[{label:'肖田',data:[12,15,8,11,16,10,14],backgroundColor:'rgba(59,130,246,0.7)',borderColor:'#3B82F6',borderWidth:1,borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}},y:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}}}}
-  });
-
-  nmC2=new Chart(document.getElementById('nmChart2'),{
-    type:'bar',
-    data:{labels:['周一','周二','周三','周四','周五','周六','周日'],datasets:[{label:'巧言',data:[8,10,6,9,12,7,11],backgroundColor:'rgba(255,122,0,0.7)',borderColor:'#FF7A00',borderWidth:1,borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}},y:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}}}}
-  });
-
-  updateNM();
-})();
 
   // Real data from team_stats.db (品宣部数据统筹平台)
   var nmLabels = ["03-13", "03-14", "03-15", "03-16", "03-17", "03-18", "03-19", "03-20", "03-21", "03-22", "03-23", "03-24", "03-25", "03-26"];
