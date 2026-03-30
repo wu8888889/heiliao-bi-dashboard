@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>品宣部 BI 看板 v3</title>
+<title>品宣部 BI 看板</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -25,357 +25,210 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0F0F10;c
 .stitle .st{font-size:10px;font-weight:800;color:#BBB;letter-spacing:2px;text-transform:uppercase}
 .stitle .sl{flex:1;height:1px;background:linear-gradient(90deg,#2A2A2E,transparent)}
 .card{background:#1A1A1D;border:1px solid #262629;border-radius:12px;overflow:hidden;margin-bottom:10px}
-.chdr{padding:11px 14px;border-bottom:1px solid:#232326;background:#1F1F22}
+.chdr{padding:11px 14px;border-bottom:1px solid #232326;background:#1F1F22}
 .ctitle{font-size:12px;font-weight:800;color:#F5F0E8;display:flex;align-items:center;gap:7px}
 .dot3{width:5px;height:5px;border-radius:50%;background:#FF7A00;flex-shrink:0}
 .cbdy{padding:12px 14px}
 .cwrap{position:relative;height:200px}
 .cwrap-sm{position:relative;height:160px}
-
-/* TOP STRIP - 4 brand totals */
 .brand-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px}
-.bs-card{background:#1A1A1D;border:2px solid #262629;border-radius:12px;overflow:hidden;padding:0}
-.bs-card.h{border-color:#3B82F6}
-.bs-card.d{border-color:#22C55E}
-.bs-card.w{border-color:#EAB308}
-.bs-card.bd{border-color:#EF4444}
+.bs-card{background:#1A1A1D;border:2px solid #262629;border-radius:12px;overflow:hidden}
+.bs-card.h{border-color:#3B82F6}.bs-card.d{border-color:#22C55E}.bs-card.w{border-color:#EAB308}.bs-card.bd{border-color:#EF4444}
 .bs-hdr{padding:8px 12px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #232326}
-.bs-icon{font-size:16px}
-.bs-name{font-size:12px;font-weight:900;color:#F5F0E8}
+.bs-icon{font-size:16px}.bs-name{font-size:12px;font-weight:900;color:#F5F0E8}
 .bs-mgr{font-size:9px;color:#777;margin-left:auto}
 .bs-body{padding:8px 12px}
-.bs-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0}
+.bs-row{display:flex;justify-content:space-between;align-items:center;padding:2px 0}
 .bs-lbl{font-size:10px;color:#888}
 .bs-val{font-size:13px;font-weight:900;color:#FFF;font-family:'Courier New',monospace}
 .bs-bar{height:4px;background:#1E1E20;border-radius:2px;overflow:hidden;margin:4px 0}
 .bs-fill{height:100%;border-radius:2px}
-.bs-card.h .bs-fill{background:#3B82F6}
-.bs-card.d .bs-fill{background:#22C55E}
-.bs-card.w .bs-fill{background:#EAB308}
-.bs-card.bd .bs-fill{background:#EF4444}
-
-/* KPI strip */
+.bs-card.h .bs-fill{background:#3B82F6}.bs-card.d .bs-fill{background:#22C55E}.bs-card.w .bs-fill{background:#EAB308}.bs-card.bd .bs-fill{background:#EF4444}
 .kstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.kbox{background:#1A1A1D;border:1px solid #262629;border-radius:10px;padding:12px 10px;text-align:center}
-.kbox::before{content:'';display:block;height:2px;margin:-12px -10px 8px}
-.kbox.green::before{background:#22C55E}
-.kbox.orange::before{background:#FF7A00}
-.kbox.blue::before{background:#3B82F6}
-.kbox.red::before{background:#EF4444}
+.kbox{background:#1A1A1D;border:1px solid #262629;border-radius:10px;padding:11px 10px;text-align:center;position:relative}
+.kbox::before{content:'';display:block;height:2px;margin:-11px -10px 8px}
+.kbox.green::before{background:#22C55E}.kbox.orange::before{background:#FF7A00}.kbox.blue::before{background:#3B82F6}.kbox.red::before{background:#EF4444}
 .kval{font-size:24px;font-weight:900;color:#FFF;line-height:1}
 .ksub{font-size:9px;color:#888;margin-top:3px}
 .knote{font-size:8px;color:#555;margin-top:2px}
-
-/* Planning table */
 .plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .plan-box{background:#1A1A1D;border:1px solid #262629;border-radius:10px;padding:11px 12px}
-.plan-box.red{border-color:#EF4444;background:rgba(239,68,68,0.05)}
-.plan-box.orange{border-color:#FF7A00;background:rgba(255,122,0,0.05)}
-.plan-box.blue{border-color:#3B82F6;background:rgba(59,130,246,0.05)}
-.plan-box.green{border-color:#22C55E;background:rgba(34,197,94,0.05)}
+.plan-box.rb{border-color:#EF4444}.plan-box.ob{border-color:#FF7A00}.plan-box.bb{border-color:#3B82F6}.plan-box.gb{border-color:#22C55E}
 .plan-lbl{font-size:9px;font-weight:800;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
 .plan-val{font-size:22px;font-weight:900;color:#FFF;line-height:1}
 .plan-sub{font-size:9px;color:#888;margin-top:3px}
 .plan-items{font-size:10px;color:#AAA;margin-top:6px;line-height:1.8}
 .plan-item{display:flex;align-items:flex-start;gap:5px}
 .plan-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.d-red{background:#EF4444}
-.d-orange{background:#FF7A00}
-.d-blue{background:#3B82F6}
-.d-green{background:#22C55E}
-
-/* Team tables */
+.dp{background:#EF4444}.do{background:#FF7A00}.db{background:#3B82F6}.dg{background:#22C55E}
+select{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:8px;padding:4px 10px;font-size:11px;font-family:inherit;cursor:pointer}
 .team-section{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .team-card{background:#1A1A1D;border:1px solid #262629;border-radius:12px;overflow:hidden}
 .team-hdr{padding:10px 14px;background:#1F1F22;border-bottom:1px solid #232326;display:flex;align-items:center;gap:8px}
-.team-icon{font-size:16px}
-.team-name{font-size:12px;font-weight:900;color:#F5F0E8}
+.team-icon{font-size:16px}.team-name{font-size:12px;font-weight:900;color:#F5F0E8}
 .team-badge{font-size:9px;background:#FF7A00;color:#fff;padding:2px 7px;border-radius:8px;margin-left:auto;font-weight:700}
 .team-body{padding:10px 14px}
 .team-summary{display:flex;gap:8px;margin-bottom:10px}
 .ts-item{background:#222225;border-radius:8px;padding:8px 12px;text-align:center;flex:1}
-.ts-val{font-size:18px;font-weight:900;color:#FFF}
-.ts-lbl{font-size:9px;color:#888;margin-top:2px}
+.ts-val{font-size:18px;font-weight:900;color:#FFF}.ts-lbl{font-size:9px;color:#888;margin-top:2px}
 .team-table{width:100%;border-collapse:collapse}
 .team-table th{font-size:9px;color:#666;letter-spacing:1px;text-transform:uppercase;text-align:left;padding:6px 8px;border-bottom:1px solid #232326;font-weight:600}
 .team-table td{font-size:11px;color:#BBB;padding:7px 8px;border-bottom:1px solid #1E1E20;vertical-align:middle}
 .team-table tr:last-child td{border-bottom:none}
 .tm-name{font-weight:700;color:#F5F0E8}
 .tm-bar{height:5px;background:#1E1E20;border-radius:3px;overflow:hidden;width:70px;display:inline-block;vertical-align:middle;margin-right:6px}
-.tm-fill{height:100%;border-radius:3px;background:#FF7A00}
-.tm-fill.done{background:#22C55E}
-.tm-fill.ongoing{background:#FF7A00}
+.tm-fill{height:100%;border-radius:3px}
+.tm-fill.done{background:#22C55E}.tm-fill.ongoing{background:#FF7A00}.tm-fill.idle{background:#3B82F6}
 .tag{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px}
-.tg{background:rgba(34,197,94,0.15);color:#22C55E}
-.ty{background:rgba(255,122,0,0.15);color:#FF7A00}
-.trd{background:rgba(239,68,68,0.15);color:#EF4444}
-.tb{background:rgba(59,130,246,0.15);color:#3B82F6}
-
-/* Brand detail cards */
+.tg{background:rgba(34,197,94,0.15);color:#22C55E}.ty{background:rgba(255,122,0,0.15);color:#FF7A00}.trd{background:rgba(239,68,68,0.15);color:#EF4444}.tb{background:rgba(59,130,246,0.15);color:#3B82F6}
+.vstat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.vsbox{background:#222225;border-radius:9px;padding:8px;text-align:center}
+.vsval{font-size:17px;font-weight:900;color:#FFF}.vslbl{font-size:8px;color:#666;margin-top:2px}
+.vpbar{height:6px;background:#1E1E20;border-radius:3px;overflow:hidden;display:flex;margin-top:8px}
+.vseg{height:100%;min-width:20px;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700}
+.v0{background:#555}.v1{background:#EF4444}.v2{background:#FF7A00}.v3{background:#FFB347}.v4{background:#22C55E}.v5{background:#3B82F6}
+.vleg{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.vleg-item{font-size:9px;color:#888;display:flex;align-items:center;gap:3px}
+.vleg-dot{width:8px;height:8px;border-radius:2px}
 .bd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .bd-card{background:#1A1A1D;border:2px solid #262629;border-radius:12px;overflow:hidden}
-.bd-card.h{border-color:#3B82F6}
-.bd-card.d{border-color:#22C55E}
-.bd-card.w{border-color:#EAB308}
-.bd-card.bd{border-color:#EF4444}
+.bd-card.h{border-color:#3B82F6}.bd-card.d{border-color:#22C55E}.bd-card.w{border-color:#EAB308}.bd-card.bd{border-color:#EF4444}
 .bd-hdr{padding:10px 12px;background:#1F1F22;border-bottom:1px solid #232326;display:flex;align-items:center;gap:7px}
-.bd-icon{font-size:18px}
-.bd-name{font-size:13px;font-weight:900;color:#F5F0E8}
-.bd-mgr{font-size:9px;color:#888;margin-left:auto}
+.bd-icon{font-size:18px}.bd-name{font-size:13px;font-weight:900;color:#F5F0E8}.bd-mgr{font-size:9px;color:#888;margin-left:auto}
 .bd-body{padding:10px 12px}
 .bd-stats{display:flex;gap:6px;margin-bottom:8px}
 .bd-stat{background:#222225;border-radius:8px;padding:7px 10px;text-align:center;flex:1}
-.bd-sval{font-size:16px;font-weight:900;color:#FFF}
-.bd-slbl{font-size:8px;color:#666;margin-top:1px}
+.bd-sval{font-size:16px;font-weight:900;color:#FFF}.bd-slbl{font-size:8px;color:#666;margin-top:1px}
 .bd-row{display:flex;justify-content:space-between;padding:3px 0}
-.bd-lbl{font-size:10px;color:#888}
-.bd-val2{font-size:11px;font-weight:700;color:#FFF}
+.bd-lbl{font-size:10px;color:#888}.bd-val2{font-size:11px;font-weight:700;color:#FFF}
 .bd-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
 .bd-tag{padding:2px 6px;border-radius:8px;font-size:9px;font-weight:700}
-
-/* Video pipeline */
-.vstat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-.vsbox{background:#222225;border-radius:9px;padding:8px;text-align:center}
-.vsval{font-size:17px;font-weight:900;color:#FFF}
-.vslbl{font-size:8px;color:#666;margin-top:2px}
-.vprog-bar{height:6px;background:#1E1E20;border-radius:3px;overflow:hidden;display:flex;margin-top:8px}
-.vseg{height:100%;min-width:30px;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700}
-.v1{background:#EF4444}
-.v2{background:#FF7A00}
-.v3{background:#FFB347}
-.v4{background:#22C55E}
-.v5{background:#3B82F6}
-
-/* Agent */
 .aGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .aCard{background:#1A1A1D;border:1px solid #262629;border-radius:12px;padding:12px 14px}
 .aHdr{font-size:10px;font-weight:800;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
 .aRow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1E1E20;font-size:11px}
 .aRow:last-child{border-bottom:none}
-.aL{color:#AAA}
-.aR{color:#FF7A00;font-weight:700;font-family:'Courier New',monospace}
-.aGreen{color:#22C55E}
-.aRed{color:#EF4444}
-
-/* New media */
+.aL{color:#AAA}.aR{color:#FF7A00;font-weight:700;font-family:'Courier New',monospace}
+.aGreen{color:#22C55E}.aRed{color:#EF4444}
 .nmGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .nmCard{background:#1A1A1D;border:1px solid #262629;border-radius:12px;overflow:hidden}
 .nmHdr{padding:10px 12px;background:#1F1F22;border-bottom:1px solid #232326;display:flex;align-items:center;gap:7px}
-.nmIcon{font-size:16px}
-.nmName{font-size:12px;font-weight:900;color:#F5F0E8}
-.nmMgr{font-size:9px;color:#888;margin-left:auto}
+.nmIcon{font-size:16px}.nmName{font-size:12px;font-weight:900;color:#F5F0E8}.nmMgr{font-size:9px;color:#888;margin-left:auto}
+select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:8px;padding:3px 8px;font-size:10px;font-family:inherit;cursor:pointer}
 .nmBody{padding:10px 12px}
-.nmRow{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1E1E20}
-.nmRow:last-child{border-bottom:none}
-.nmLbl{font-size:10px;color:#888}
-.nmVal{font-size:11px;font-weight:700;color:#FFF;font-family:'Courier New',monospace}
-.trend{padding:1px 5px;border-radius:6px;font-size:9px;font-weight:700;margin-left:5px}
-.up{background:rgba(34,197,94,0.15);color:#22C55E}
-.down{background:rgba(239,68,68,0.15);color:#EF4444}
 .nm-metrics{display:flex;flex-direction:column;gap:4px}
-.nmm-row{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#222225;border-radius:8px}
-.nmm-lbl{font-size:11px;color:#888;width:48px;flex-shrink:0}
-.nmm-val{font-size:13px;font-weight:900;color:#FFF;font-family:'Courier New',monospace;flex:1}
-
+.nmm-row{display:flex;align-items:center;gap:8px;padding:5px 9px;background:#222225;border-radius:8px}
+.nmm-lbl{font-size:11px;color:#888;width:44px;flex-shrink:0}
+.nmm-val{font-size:12px;font-weight:900;color:#FFF;font-family:'Courier New',monospace;flex:1}
+.trend{padding:1px 5px;border-radius:6px;font-size:9px;font-weight:700;margin-left:5px}
+.up{background:rgba(34,197,94,0.15);color:#22C55E}.down{background:rgba(239,68,68,0.15);color:#EF4444}
+.nmchart-wrap{height:140px;margin-top:10px}
 .footer{text-align:center;font-size:9px;color:#444;padding:16px 0;border-top:1px solid #1A1A1C;margin-top:24px}
 @media(max-width:768px){
-  .topbar{padding:0 12px;height:50px}
-  .logo{font-size:13px}
-  .brand-strip{grid-template-columns:repeat(2,1fr)}
-  .kstrip{grid-template-columns:repeat(2,1fr)}
-  .plan-grid{grid-template-columns:1fr 1fr}
-  .team-section{grid-template-columns:1fr}
-  .bd-grid{grid-template-columns:1fr}
-  .aGrid{grid-template-columns:1fr}
-  .nmGrid{grid-template-columns:1fr}
+  .topbar{padding:0 12px;height:50px}.logo{font-size:13px}
+  .brand-strip,.kstrip,.plan-grid{grid-template-columns:repeat(2,1fr)}
+  .team-section,.bd-grid,.aGrid,.nmGrid{grid-template-columns:1fr}
   .vstat-row{grid-template-columns:repeat(3,1fr)}
 }
-</style>
+
+    .ext-btn{display:inline-block;background:linear-gradient(135deg,#A855F7,#6366F1);color:#fff;font-size:11px;padding:5px 12px;border-radius:16px;text-decoration:none;margin-left:12px;vertical-align:middle;transition:opacity 0.2s}
+    .ext-btn:hover{opacity:0.85}
+  </style>
 </head>
 <body>
 
 <div class="topbar">
   <div style="display:flex;align-items:center;gap:8px">
-    <div class="logo">品宣部 <span>BI</span> <small>v3</small></div>
+    <div class="logo">品宣部 <span>BI</span> <small>看板</small></div>
     <div class="sep"></div>
     <div class="live"><div class="dot2"></div>实时</div>
   </div>
-  <div class="tr">
-    <span id="ck">--:--:--</span>
-    <span id="cd">----/--/--</span>
-  </div>
+  <div class="tr"><span id="ck">--:--:--</span><span id="cd">----/--/--</span></div>
 </div>
 
 <div class="main">
 
-  <!-- SECTION 0: Brand quick stats strip -->
+  <!-- BRAND STRIP -->
   <div class="section">
     <div class="stitle"><span class="si">🏢</span><span class="st">四大品牌总览</span><div class="sl"></div></div>
     <div class="brand-strip">
-      <div class="bs-card h">
-        <div class="bs-hdr"><span class="bs-icon">🔵</span><span class="bs-name">黑料网</span><span class="bs-mgr">雾岚</span></div>
-        <div class="bs-body">
-          <div class="bs-row"><span class="bs-lbl">总任务</span><span class="bs-val">17件</span></div>
-          <div class="bs-row"><span class="bs-lbl">已完成</span><span class="bs-val">9件</span></div>
-          <div class="bs-row"><span class="bs-lbl">进行中</span><span class="bs-val">5件</span></div>
-          <div class="bs-row"><span class="bs-lbl">待启动</span><span class="bs-val">3件</span></div>
-          <div class="bs-bar"><div class="bs-fill" style="width:53%"></div></div>
-        </div>
-      </div>
-      <div class="bs-card d">
-        <div class="bs-hdr"><span class="bs-icon">🟢</span><span class="bs-name">每日大赛</span><span class="bs-mgr">飞羽</span></div>
-        <div class="bs-body">
-          <div class="bs-row"><span class="bs-lbl">总任务</span><span class="bs-val">12件</span></div>
-          <div class="bs-row"><span class="bs-lbl">已完成</span><span class="bs-val">6件</span></div>
-          <div class="bs-row"><span class="bs-lbl">进行中</span><span class="bs-val">4件</span></div>
-          <div class="bs-row"><span class="bs-lbl">待启动</span><span class="bs-val">2件</span></div>
-          <div class="bs-bar"><div class="bs-fill" style="width:50%"></div></div>
-        </div>
-      </div>
-      <div class="bs-card w">
-        <div class="bs-hdr"><span class="bs-icon">🟡</span><span class="bs-name">51吃瓜</span><span class="bs-mgr">乔乔</span></div>
-        <div class="bs-body">
-          <div class="bs-row"><span class="bs-lbl">总任务</span><span class="bs-val">14件</span></div>
-          <div class="bs-row"><span class="bs-lbl">已完成</span><span class="bs-val">8件</span></div>
-          <div class="bs-row"><span class="bs-lbl">进行中</span><span class="bs-val">4件</span></div>
-          <div class="bs-row"><span class="bs-lbl">待启动</span><span class="bs-val">2件</span></div>
-          <div class="bs-bar"><div class="bs-fill" style="width:57%"></div></div>
-        </div>
-      </div>
-      <div class="bs-card bd">
-        <div class="bs-hdr"><span class="bs-icon">🔴</span><span class="bs-name">黑料不打烊</span><span class="bs-mgr">青灰</span></div>
-        <div class="bs-body">
-          <div class="bs-row"><span class="bs-lbl">总任务</span><span class="bs-val">10件</span></div>
-          <div class="bs-row"><span class="bs-lbl">已完成</span><span class="bs-val">5件</span></div>
-          <div class="bs-row"><span class="bs-lbl">进行中</span><span class="bs-val">3件</span></div>
-          <div class="bs-row"><span class="bs-lbl">待启动</span><span class="bs-val">2件</span></div>
-          <div class="bs-bar"><div class="bs-fill" style="width:50%"></div></div>
-        </div>
-      </div>
+      <div class="bs-card h"><div class="bs-hdr"><span class="bs-icon">🔵</span><span class="bs-name">黑料网</span><span class="bs-mgr">雾岚</span></div><div class="bs-body"><div class="bs-row"><span class="bs-lbl">素材库</span><span class="bs-val">6 项</span></div><div class="bs-row"><span class="bs-lbl">设计需求</span><span class="bs-val">15 件</span></div><div class="bs-row"><span class="bs-lbl">视频需求</span><span class="bs-val">1 件</span></div><div class="bs-row"><span class="bs-lbl">更新</span><span class="bs-val">03-21</span></div><div class="bs-bar"><div class="bs-fill" style="width:40%"></div></div></div></div>
+      <div class="bs-card d"><div class="bs-hdr"><span class="bs-icon">🟢</span><span class="bs-name">每日大赛</span><span class="bs-mgr">飞羽</span></div><div class="bs-body"><div class="bs-row"><span class="bs-lbl">素材库</span><span class="bs-val">8 项</span></div><div class="bs-row"><span class="bs-lbl">设计需求</span><span class="bs-val">9 件</span></div><div class="bs-row"><span class="bs-lbl">视频需求</span><span class="bs-val">3 件</span></div><div class="bs-row"><span class="bs-lbl">更新</span><span class="bs-val">03-23</span></div><div class="bs-bar"><div class="bs-fill" style="width:35%"></div></div></div></div>
+      <div class="bs-card w"><div class="bs-hdr"><span class="bs-icon">🟡</span><span class="bs-name">51吃瓜</span><span class="bs-mgr">乔乔</span></div><div class="bs-body"><div class="bs-row"><span class="bs-lbl">素材库</span><span class="bs-val">9 项</span></div><div class="bs-row"><span class="bs-lbl">设计需求</span><span class="bs-val">11 件</span></div><div class="bs-row"><span class="bs-lbl">视频需求</span><span class="bs-val">3 件</span></div><div class="bs-row"><span class="bs-lbl">更新</span><span class="bs-val">03月</span></div><div class="bs-bar"><div class="bs-fill" style="width:45%"></div></div></div></div>
+      <div class="bs-card bd"><div class="bs-hdr"><span class="bs-icon">🔴</span><span class="bs-name">黑料不打烊</span><span class="bs-mgr">青灰</span></div><div class="bs-body"><div class="bs-row"><span class="bs-lbl">素材库</span><span class="bs-val">11 项</span></div><div class="bs-row"><span class="bs-lbl">设计需求</span><span class="bs-val">7 件</span></div><div class="bs-row"><span class="bs-lbl">视频需求</span><span class="bs-val">3 件</span></div><div class="bs-row"><span class="bs-lbl">更新</span><span class="bs-val">03月</span></div><div class="bs-bar"><div class="bs-fill" style="width:55%"></div></div></div></div>
     </div>
   </div>
 
-  <!-- SECTION 1: KPI summary strip -->
+  <!-- KPI -->
   <div class="section">
     <div class="stitle"><span class="si">📊</span><span class="st">品宣部总览</span><div class="sl"></div></div>
     <div class="kstrip">
-      <div class="kbox green"><div class="kval">28</div><div class="ksub">已完成</div><div class="knote">设计 19 / 视频 9</div></div>
-      <div class="kbox orange"><div class="kval">16</div><div class="ksub">进行中</div><div class="knote">制作 + 审核</div></div>
-      <div class="kbox blue"><div class="kval">9</div><div class="ksub">排期中</div><div class="knote">待启动</div></div>
+      <div class="kbox green"><div class="kval">7</div><div class="ksub">已完成</div><div class="knote">设计 1 / 视频 6</div></div>
+      <div class="kbox orange"><div class="kval">7</div><div class="ksub">进行中</div><div class="knote">制作 + 验收</div></div>
+      <div class="kbox blue"><div class="kval">48</div><div class="ksub">排期中</div><div class="knote">待启动</div></div>
       <div class="kbox red"><div class="kval">0</div><div class="ksub">逾期</div><div class="knote">无逾期</div></div>
     </div>
   </div>
 
-  <!-- SECTION 2: Planning table -->
+  <!-- PIE -->
+  <div class="section">
+    <div class="card">
+      <div class="chdr"><div class="ctitle"><div class="dot3"></div>任务状态分布（设计 49件 / 视频 13件）</div></div>
+      <div class="cbdy"><div class="cwrap"><canvas id="cPie"></canvas></div></div>
+    </div>
+  </div>
+
+  <!-- PLANNING -->
   <div class="section">
     <div class="stitle"><span class="si">📅</span><span class="st">规划表</span>
-      <select id="planPeriod" onchange="updatePlan()" style="margin-left:auto;background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:8px;padding:4px 10px;font-size:11px;font-family:inherit;cursor:pointer">
+      <select id="planPeriod" onchange="updatePlan()" style="margin-left:auto">
         <option value="thisweek">本周</option>
         <option value="lastweek">对比上周</option>
         <option value="thismonth">本月</option>
       </select>
     <div class="sl"></div></div>
-    <div class="plan-grid" id="planGrid">
-      <!-- Dynamically updated -->
-    </div>
+    <div class="plan-grid" id="planGrid"></div>
   </div>
 
-  <!-- SECTION 3: Team breakdown -->
+  <!-- TEAMS -->
   <div class="section">
     <div class="stitle"><span class="si">👥</span><span class="st">设计组 & 视频组</span><div class="sl"></div></div>
     <div class="team-section">
-      <!-- Design team -->
       <div class="team-card">
-        <div class="team-hdr">
-          <span class="team-icon">🎨</span>
-          <span class="team-name">设计组</span>
-          <span class="team-badge">4人</span>
-        </div>
+        <div class="team-hdr"><span class="team-icon">🎨</span><span class="team-name">设计组</span><span class="team-badge">4人</span></div>
         <div class="team-body">
           <div class="team-summary">
-            <div class="ts-item"><div class="ts-val">48</div><div class="ts-lbl">总任务</div></div>
-            <div class="ts-item"><div class="ts-val">19</div><div class="ts-lbl">已完成</div></div>
-            <div class="ts-item"><div class="ts-val">29</div><div class="ts-lbl">进行中</div></div>
+            <div class="ts-item"><div class="ts-val">49</div><div class="ts-lbl">总任务</div></div>
+            <div class="ts-item"><div class="ts-val">1</div><div class="ts-lbl">已完成</div></div>
+            <div class="ts-item"><div class="ts-val">48</div><div class="ts-lbl">待启动</div></div>
           </div>
           <table class="team-table">
-            <thead><tr><th>设计师</th><th>任务</th><th>完成</th><th>进度</th><th>状态</th></tr></thead>
+            <thead><tr><th>设计师</th><th>总任务</th><th>完成</th><th>进度</th><th>状态</th></tr></thead>
             <tbody>
-              <tr>
-                <td class="tm-name">小开</td>
-                <td>29</td>
-                <td>9</td>
-                <td><div class="tm-bar"><div class="tm-fill" style="width:31%"></div></div></td>
-                <td><span class="tag ty">进行中</span></td>
-              </tr>
-              <tr>
-                <td class="tm-name">大雍</td>
-                <td>16</td>
-                <td>7</td>
-                <td><div class="tm-bar"><div class="tm-fill" style="width:44%"></div></div></td>
-                <td><span class="tag ty">进行中</span></td>
-              </tr>
-              <tr>
-                <td class="tm-name">卡罗</td>
-                <td>2</td>
-                <td>2</td>
-                <td><div class="tm-bar"><div class="tm-fill done" style="width:100%"></div></div></td>
-                <td><span class="tag tg">完成</span></td>
-              </tr>
-              <tr>
-                <td class="tm-name">千寻</td>
-                <td>1</td>
-                <td>1</td>
-                <td><div class="tm-bar"><div class="tm-fill done" style="width:100%"></div></div></td>
-                <td><span class="tag tg">完成</span></td>
-              </tr>
+              <tr><td class="tm-name">小开</td><td>29</td><td>1</td><td><div class="tm-bar"><div class="tm-fill idle" style="width:3%"></div></div></td><td><span class="tag tb">待启动</span></td></tr>
+              <tr><td class="tm-name">大雍</td><td>16</td><td>0</td><td><div class="tm-bar"><div class="tm-fill idle" style="width:0%"></div></div></td><td><span class="tag tb">待启动</span></td></tr>
+              <tr><td class="tm-name">卡罗</td><td>2</td><td>0</td><td><div class="tm-bar"><div class="tm-fill idle" style="width:0%"></div></div></td><td><span class="tag tb">待启动</span></td></tr>
+              <tr><td class="tm-name">千寻</td><td>1</td><td>0</td><td><div class="tm-bar"><div class="tm-fill idle" style="width:0%"></div></div></td><td><span class="tag tb">待启动</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
-      <!-- Video team -->
       <div class="team-card">
-        <div class="team-hdr">
-          <span class="team-icon">🎬</span>
-          <span class="team-name">视频组</span>
-          <span class="team-badge">4人</span>
-        </div>
+        <div class="team-hdr"><span class="team-icon">🎬</span><span class="team-name">视频组</span><span class="team-badge">4人</span></div>
         <div class="team-body">
           <div class="team-summary">
             <div class="ts-item"><div class="ts-val">13</div><div class="ts-lbl">总任务</div></div>
-            <div class="ts-item"><div class="ts-val">9</div><div class="ts-lbl">已完成</div></div>
-            <div class="ts-item"><div class="ts-val">4</div><div class="ts-lbl">进行中</div></div>
+            <div class="ts-item"><div class="ts-val">6</div><div class="ts-lbl">已完成</div></div>
+            <div class="ts-item"><div class="ts-val">7</div><div class="ts-lbl">进行中</div></div>
           </div>
           <table class="team-table">
-            <thead><tr><th>制作人</th><th>任务</th><th>完成</th><th>进度</th><th>状态</th></tr></thead>
+            <thead><tr><th>制作人</th><th>总任务</th><th>完成</th><th>进度</th><th>状态</th></tr></thead>
             <tbody>
-              <tr>
-                <td class="tm-name">阿尼</td>
-                <td>4</td>
-                <td>3</td>
-                <td><div class="tm-bar"><div class="tm-fill done" style="width:75%"></div></div></td>
-                <td><span class="tag ty">进行中</span></td>
-              </tr>
-              <tr>
-                <td class="tm-name">文森</td>
-                <td>2</td>
-                <td>2</td>
-                <td><div class="tm-bar"><div class="tm-fill done" style="width:100%"></div></div></td>
-                <td><span class="tag tg">完成</span></td>
-              </tr>
-              <tr>
-                <td class="tm-name">小韩</td>
-                <td>2</td>
-                <td>1</td>
-                <td><div class="tm-bar"><div class="tm-fill" style="width:50%"></div></div></td>
-                <td><span class="tag ty">进行中</span></td>
-              </tr>
-              <tr>
-                <td class="tm-name">叶秋</td>
-                <td>5</td>
-                <td>3</td>
-                <td><div class="tm-bar"><div class="tm-fill done" style="width:60%"></div></div></td>
-                <td><span class="tag ty">进行中</span></td>
-              </tr>
+              <tr><td class="tm-name">小韩</td><td>2</td><td>0</td><td><div class="tm-bar"><div class="tm-fill ongoing" style="width:30%"></div></div></td><td><span class="tag ty">进行中</span></td></tr>
+              <tr><td class="tm-name">阿尼</td><td>2</td><td>0</td><td><div class="tm-bar"><div class="tm-fill ongoing" style="width:20%"></div></div></td><td><span class="tag ty">进行中</span></td></tr>
+              <tr><td class="tm-name">文森</td><td>2</td><td>0</td><td><div class="tm-bar"><div class="tm-fill ongoing" style="width:60%"></div></div></td><td><span class="tag ty">进行中</span></td></tr>
+              <tr><td class="tm-name">叶秋/阿尼</td><td>2</td><td>0</td><td><div class="tm-bar"><div class="tm-fill ongoing" style="width:10%"></div></div></td><td><span class="tag ty">进行中</span></td></tr>
+              <tr><td class="tm-name">叶秋/小韩/阿尼</td><td>3</td><td>0</td><td><div class="tm-bar"><div class="tm-fill ongoing" style="width:5%"></div></div></td><td><span class="tag ty">进行中</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -383,140 +236,84 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0F0F10;c
     </div>
   </div>
 
-  <!-- SECTION 4: Video pipeline -->
+  <!-- VIDEO -->
   <div class="section">
     <div class="stitle"><span class="si">🎬</span><span class="st">视频流水线</span><div class="sl"></div></div>
     <div class="card">
       <div class="chdr"><div class="ctitle"><div class="dot3"></div>视频需求状态分布（累计 13 件）</div></div>
       <div class="cbdy">
         <div class="vstat-row">
-          <div class="vsbox"><div class="vsval">1</div><div class="vslbl">未启动</div></div>
+          <div class="vsbox"><div class="vsval">1</div><div class="vslbl">排期中</div></div>
           <div class="vsbox"><div class="vsval">1</div><div class="vslbl">制作中</div></div>
           <div class="vsbox"><div class="vsval">1</div><div class="vslbl">优化中</div></div>
           <div class="vsbox"><div class="vsval">2</div><div class="vslbl">等待验收</div></div>
-          <div class="vsbox"><div class="vsval">4</div><div class="vslbl">已验收</div></div>
+          <div class="vsbox"><div class="vsval">6</div><div class="vslbl">已验收</div></div>
+          <div class="vsbox"><div class="vsval">2</div><div class="vslbl">已交付</div></div>
         </div>
-        <div class="vprog-bar">
+        <div class="vpbar">
           <div class="vseg v1" style="flex:1">1</div>
           <div class="vseg v2" style="flex:1">1</div>
           <div class="vseg v3" style="flex:1">1</div>
           <div class="vseg v4" style="flex:2">2</div>
-          <div class="vseg v5" style="flex:4">4</div>
+          <div class="vseg v5" style="flex:6">6</div>
+          <div class="vseg v0" style="flex:2">2</div>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-          <div style="font-size:9px;color:#888;display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:#EF4444"></div>未启动</div>
-          <div style="font-size:9px;color:#888;display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:#FF7A00"></div>制作中</div>
-          <div style="font-size:9px;color:#888;display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:#FFB347"></div>优化中</div>
-          <div style="font-size:9px;color:#888;display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:#22C55E"></div>等待验收</div>
-          <div style="font-size:9px;color:#888;display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:#3B82F6"></div>已验收</div>
+        <div class="vleg">
+          <div class="vleg-item"><div class="vleg-dot" style="background:#EF4444"></div>排期中</div>
+          <div class="vleg-item"><div class="vleg-dot" style="background:#FF7A00"></div>制作中</div>
+          <div class="vleg-item"><div class="vleg-dot" style="background:#FFB347"></div>优化中</div>
+          <div class="vleg-item"><div class="vleg-dot" style="background:#22C55E"></div>等待验收</div>
+          <div class="vleg-item"><div class="vleg-dot" style="background:#3B82F6"></div>已验收</div>
+          <div class="vleg-item"><div class="vleg-dot" style="background:#555"></div>已交付</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 5: 4 brand detail -->
+  <!-- BRAND DETAIL -->
   <div class="section">
     <div class="stitle"><span class="si">📋</span><span class="st">四大品牌详情</span><div class="sl"></div></div>
     <div class="bd-grid">
-      <div class="bd-card h">
-        <div class="bd-hdr"><span class="bd-icon">🔵</span><span class="bd-name">黑料网</span><span class="bd-mgr">雾岚</span></div>
-        <div class="bd-body">
-          <div class="bd-stats">
-            <div class="bd-stat"><div class="bd-sval">6</div><div class="bd-slbl">素材库</div></div>
-            <div class="bd-stat"><div class="bd-sval">15</div><div class="bd-slbl">设计</div></div>
-            <div class="bd-stat"><div class="bd-sval">2</div><div class="bd-slbl">视频</div></div>
-          </div>
-          <div class="bd-row"><span class="bd-lbl">最新更新</span><span class="bd-val2">03-23</span></div>
-          <div class="bd-row"><span class="bd-lbl">Logo</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">IP表情包</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">BGM</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">视频模板</span><span class="bd-val2">🔄 制作中</span></div>
-          <div class="bd-tags">
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">Logo</span>
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">IP表情包</span>
-            <span class="bd-tag ty" style="background:rgba(255,122,0,0.15);color:#FF7A00">视频制作</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bd-card d">
-        <div class="bd-hdr"><span class="bd-icon">🟢</span><span class="bd-name">每日大赛</span><span class="bd-mgr">飞羽</span></div>
-        <div class="bd-body">
-          <div class="bd-stats">
-            <div class="bd-stat"><div class="bd-sval">8</div><div class="bd-slbl">素材库</div></div>
-            <div class="bd-stat"><div class="bd-sval">9</div><div class="bd-slbl">设计</div></div>
-            <div class="bd-stat"><div class="bd-sval">3</div><div class="bd-slbl">视频</div></div>
-          </div>
-          <div class="bd-row"><span class="bd-lbl">最新更新</span><span class="bd-val2">03-23</span></div>
-          <div class="bd-row"><span class="bd-lbl">Logo</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">AI模板SOP</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">域名</span><span class="bd-val2">🔄 确认中</span></div>
-          <div class="bd-tags">
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">Logo完成</span>
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">AI SOP</span>
-            <span class="bd-tag ty" style="background:rgba(255,122,0,0.15);color:#FF7A00">域名待确认</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bd-card w">
-        <div class="bd-hdr"><span class="bd-icon">🟡</span><span class="bd-name">51吃瓜</span><span class="bd-mgr">乔乔</span></div>
-        <div class="bd-body">
-          <div class="bd-stats">
-            <div class="bd-stat"><div class="bd-sval">9</div><div class="bd-slbl">素材库</div></div>
-            <div class="bd-stat"><div class="bd-sval">11</div><div class="bd-slbl">设计</div></div>
-            <div class="bd-stat"><div class="bd-sval">3</div><div class="bd-slbl">视频</div></div>
-          </div>
-          <div class="bd-row"><span class="bd-lbl">最新更新</span><span class="bd-val2">03月</span></div>
-          <div class="bd-row"><span class="bd-lbl">Logo</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">水印</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">视频边框</span><span class="bd-val2">🔄 制作中</span></div>
-          <div class="bd-tags">
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">Logo</span>
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">水印</span>
-            <span class="bd-tag ty" style="background:rgba(255,122,0,0.15);color:#FF7A00">边框制作</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bd-card bd">
-        <div class="bd-hdr"><span class="bd-icon">🔴</span><span class="bd-name">黑料不打烊</span><span class="bd-mgr">青灰</span></div>
-        <div class="bd-body">
-          <div class="bd-stats">
-            <div class="bd-stat"><div class="bd-sval">11</div><div class="bd-slbl">素材库</div></div>
-            <div class="bd-stat"><div class="bd-sval">7</div><div class="bd-slbl">设计</div></div>
-            <div class="bd-stat"><div class="bd-sval">3</div><div class="bd-slbl">视频</div></div>
-          </div>
-          <div class="bd-row"><span class="bd-lbl">最新更新</span><span class="bd-val2">03月</span></div>
-          <div class="bd-row"><span class="bd-lbl">Logo v2</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">IP表情包</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-row"><span class="bd-lbl">BGM</span><span class="bd-val2">✅ 完成</span></div>
-          <div class="bd-tags">
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">Logo v2</span>
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">IP表情包</span>
-            <span class="bd-tag tg" style="background:rgba(34,197,94,0.15);color:#22C55E">BGM</span>
-          </div>
-        </div>
-      </div>
-
+      <div class="bd-card h"><div class="bd-hdr"><span class="bd-icon">🔵</span><span class="bd-name">黑料网</span><span class="bd-mgr">雾岚</span></div><div class="bd-body"><div class="bd-stats"><div class="bd-stat"><div class="bd-sval">6</div><div class="bd-slbl">素材库</div></div><div class="bd-stat"><div class="bd-sval">15</div><div class="bd-slbl">设计</div></div><div class="bd-stat"><div class="bd-sval">1</div><div class="bd-slbl">视频</div></div></div><div class="bd-row"><span class="bd-lbl">Logo</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">IP表情包</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">BGM</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">视频模板</span><span class="bd-val2">🔄 制作中</span></div><div class="bd-tags"><span class="tag tg">Logo</span><span class="tag tg">IP表情包</span><span class="tag ty">视频制作</span></div></div></div>
+      <div class="bd-card d"><div class="bd-hdr"><span class="bd-icon">🟢</span><span class="bd-name">每日大赛</span><span class="bd-mgr">飞羽</span></div><div class="bd-body"><div class="bd-stats"><div class="bd-stat"><div class="bd-sval">8</div><div class="bd-slbl">素材库</div></div><div class="bd-stat"><div class="bd-sval">9</div><div class="bd-slbl">设计</div></div><div class="bd-stat"><div class="bd-sval">3</div><div class="bd-slbl">视频</div></div></div><div class="bd-row"><span class="bd-lbl">Logo</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">AI模板SOP</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">域名</span><span class="bd-val2">🔄 确认中</span></div><div class="bd-tags"><span class="tag tg">Logo完成</span><span class="tag tg">AI SOP</span><span class="tag ty">域名待确认</span></div></div></div>
+      <div class="bd-card w"><div class="bd-hdr"><span class="bd-icon">🟡</span><span class="bd-name">51吃瓜</span><span class="bd-mgr">乔乔</span></div><div class="bd-body"><div class="bd-stats"><div class="bd-stat"><div class="bd-sval">9</div><div class="bd-slbl">素材库</div></div><div class="bd-stat"><div class="bd-sval">11</div><div class="bd-slbl">设计</div></div><div class="bd-stat"><div class="bd-sval">3</div><div class="bd-slbl">视频</div></div></div><div class="bd-row"><span class="bd-lbl">Logo</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">水印</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">视频边框</span><span class="bd-val2">🔄 制作中</span></div><div class="bd-tags"><span class="tag tg">Logo</span><span class="tag tg">水印</span><span class="tag ty">边框制作</span></div></div></div>
+      <div class="bd-card bd"><div class="bd-hdr"><span class="bd-icon">🔴</span><span class="bd-name">黑料不打烊</span><span class="bd-mgr">青灰</span></div><div class="bd-body"><div class="bd-stats"><div class="bd-stat"><div class="bd-sval">11</div><div class="bd-slbl">素材库</div></div><div class="bd-stat"><div class="bd-sval">7</div><div class="bd-slbl">设计</div></div><div class="bd-stat"><div class="bd-sval">3</div><div class="bd-slbl">视频</div></div></div><div class="bd-row"><span class="bd-lbl">Logo v2</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span<span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">IP表情包</span><span class="bd-val2">✅ 完成</span></div><div class="bd-row"><span class="bd-lbl">BGM</span><span class="bd-val2">✅ 完成</span></div><div class="bd-tags"><span class="tag tg">Logo v2</span><span class="tag tg">IP表情包</span><span class="tag tg">BGM</span></div></div></div>
     </div>
   </div>
 
-  <!-- SECTION 6: Agent workflow -->
+  <!-- AGENT -->
   <div class="section">
     
   <div class="section">
-    <div class="divider"><div class="divider-label">—— 新媒体数据 · 更新于 2026-03-26 · <a href="http://76.13.214.108:8501/" target="_blank" style="color:#A855F7;text-decoration:none">&#128279; 内网实时看板</a> ——</div></div>
+    <div class="card">
+      <div class="chdr"><div class="ctitle"><div class="dot3"></div>📡 新媒体数据（内网实时 · 需团队内部网络访问）</div></div>
+      <div class="cbdy" style="padding:12px">
+        <div style="background:#1a1a2e;border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:13px;color:#888;margin-bottom:10px">品宣部数据统筹平台</div>
+          <div style="font-size:20px;font-weight:700;color:#A855F7;margin-bottom:4px">http://76.13.214.108:8501/</div>
+          <div style="font-size:11px;color:#555;margin-bottom:16px">团队内部网络访问 · 需要认证</div>
+          <a href="http://76.13.214.108:8501/" target="_blank" class="ext-btn" style="font-size:13px;padding:8px 20px">🔗 打开实时看板</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <div class="stitle"><span class="si">&#128241;</span><span class="st">新媒体数据看板</span>
-      <a href="http://76.13.214.108:8501/" target="_blank" class="ext-btn">&#128202; 实时数据</a>
+    <div class="divider">
+    <div class="divider-label">—— 新媒体数据 · <a href="http://76.13.214.108:8501/" target="_blank" style="color:#A855F7;text-decoration:none">📡 实时数据（内网）</a> · 更新于 2026-03-26 ——</div>
+  </div>
+
+  <div class="section">
+    <div class="stitle"><span class="si">📱</span><span class="st">新媒体数据看板</span>
+      <a href="http://76.13.214.108:8501/" target="_blank" class="ext-btn">📊 实时数据</a>
     <div class="sl"></div></div>
+  </div>
 
-    <div class="kstrip" style="margin-top:-8px">
-      <div class="kbox purple"><div class="kval">2499</div><div class="ksub">总发布</div><div class="knote">全时期</div></div>
-      <div class="kbox green"><div class="kval">2106.4万</div><div class="ksub">总浏览</div><div class="knote">全时期</div></div>
-      <div class="kbox orange"><div class="kval">74.3万</div><div class="ksub">总互动</div><div class="knote">全时期</div></div>
-      <div class="kbox blue"><div class="kval">416</div><div class="ksub">破万</div><div class="knote">全时期</div></div>
+  <div class="section" style="margin-top:-8px">
+    <div class="kstrip">
+      <div class="kbox k-purple"><div class="kval">2499</div><div class="ksub">总发布</div><div class="knote">全时期</div></div>
+      <div class="kbox k-green"><div class="kval">2106.4万</div><div class="ksub">总浏览</div><div class="knote">全时期</div></div>
+      <div class="kbox k-orange"><div class="kval">74.3万</div><div class="ksub">总互动</div><div class="knote">全时期</div></div>
+      <div class="kbox k-blue"><div class="kval">416</div><div class="ksub">破万</div><div class="knote">全时期</div></div>
     </div>
   </div>
 
@@ -528,85 +325,84 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0F0F10;c
   </div>
 
   <div class="section">
-    <div class="stitle"><span class="si">&#128202;</span><span class="st">各团队数据一览</span><div class="sl"></div></div>
-    <div class="nmGrid">
-      <div class="nmCard">
-        <div class="nmHdr">
-          <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#A855F7"></span>
-          <span class="nmName">默认团队</span>
+    <div class="nm-grid">
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#A855F720;color:#A855F7">默认</span>
+          <span class="nm-name">默认团队</span>
         </div>
-        <div class="nmBody">
-          <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#A855F7">1191篇</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">605.7万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">28.9万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">204条</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">617条</span></div>
-          <div style="height:6px;background:#222225;border-radius:3px;margin-top:6px">
-            <div style="height:6px;width:100%;background:#A855F7;border-radius:3px"></div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#A855F7">1191</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">605.7万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">28.9万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">204</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">617</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:100%;background:#A855F7" class="nm-bar-fill"></div></div>
           </div>
         </div>
       </div>
-      <div class="nmCard">
-        <div class="nmHdr">
-          <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#3B82F6"></span>
-          <span class="nmName">黑料网</span>
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#3B82F620;color:#3B82F6">黑料</span>
+          <span class="nm-name">黑料网</span>
         </div>
-        <div class="nmBody">
-          <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#3B82F6">399篇</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">199.6万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">11.1万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">81条</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">192条</span></div>
-          <div style="height:6px;background:#222225;border-radius:3px;margin-top:6px">
-            <div style="height:6px;width:33%;background:#3B82F6;border-radius:3px"></div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#3B82F6">399</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">199.6万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">11.1万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">81</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">192</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:33%;background:#3B82F6" class="nm-bar-fill"></div></div>
           </div>
         </div>
       </div>
-      <div class="nmCard">
-        <div class="nmHdr">
-          <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#22C55E"></span>
-          <span class="nmName">51吃瓜</span>
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#22C55E20;color:#22C55E">51</span>
+          <span class="nm-name">51吃瓜</span>
         </div>
-        <div class="nmBody">
-          <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#22C55E">388篇</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">183.3万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">7.4万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">56条</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">159条</span></div>
-          <div style="height:6px;background:#222225;border-radius:3px;margin-top:6px">
-            <div style="height:6px;width:32%;background:#22C55E;border-radius:3px"></div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#22C55E">388</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">183.3万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">7.4万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">56</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">159</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:32%;background:#22C55E" class="nm-bar-fill"></div></div>
           </div>
         </div>
       </div>
-      <div class="nmCard">
-        <div class="nmHdr">
-          <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#FF7A00"></span>
-          <span class="nmName">黑料不打烊</span>
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#FF7A0020;color:#FF7A00">黑料</span>
+          <span class="nm-name">黑料不打烊</span>
         </div>
-        <div class="nmBody">
-          <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#FF7A00">376篇</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">214.3万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">11.4万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">75条</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">190条</span></div>
-          <div style="height:6px;background:#222225;border-radius:3px;margin-top:6px">
-            <div style="height:6px;width:31%;background:#FF7A00;border-radius:3px"></div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#FF7A00">376</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">214.3万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">11.4万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">75</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">190</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:31%;background:#FF7A00" class="nm-bar-fill"></div></div>
           </div>
         </div>
       </div>
-      <div class="nmCard">
-        <div class="nmHdr">
-          <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#EF4444"></span>
-          <span class="nmName">每日大赛</span>
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#EF444420;color:#EF4444">每日</span>
+          <span class="nm-name">每日大赛</span>
         </div>
-        <div class="nmBody">
-          <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#EF4444">145篇</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">903.4万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">15.6万</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">0条</span></div>
-          <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">0条</span></div>
-          <div style="height:6px;background:#222225;border-radius:3px;margin-top:6px">
-            <div style="height:6px;width:12%;background:#EF4444;border-radius:3px"></div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#EF4444">145</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">903.4万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">15.6万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">0</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">0</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:12%;background:#EF4444" class="nm-bar-fill"></div></div>
           </div>
         </div>
       </div>
@@ -633,32 +429,92 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0F0F10;c
             <th style="font-size:9px;color:#666;letter-spacing:1px;text-transform:uppercase;text-align:center;padding:5px 8px;font-weight:600">日期</th>
           </tr></thead>
           <tbody>
-<tr style="border-bottom:1px solid #1E1E20"><td style="font-size:11px;color:#FF7A00;font-weight:700;padding:7px 8px">★ 苏伟<br><span style="font-size:9px;color:#555">每日大赛</span></td><td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">145</td><td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">903.4万</td><td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">15.6万</td><td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-26</td></tr>
-<tr style="border-bottom:1px solid #1E1E20"><td style="font-size:11px;color:#C0C0C0;font-weight:700;padding:7px 8px">☆ 昭昭<br><span style="font-size:9px;color:#555">默认团队</span></td><td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">19</td><td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">9.3万</td><td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">1.1k</td><td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td></tr>
-<tr style="border-bottom:1px solid #1E1E20"><td style="font-size:11px;color:#CD7F32;font-weight:700;padding:7px 8px">☇ 应易言<br><span style="font-size:9px;color:#555">默认团队</span></td><td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">14</td><td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">6.2万</td><td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">3.5k</td><td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td></tr>
-<tr style="border-bottom:1px solid #1E1E20"><td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">4 吉卜力<br><span style="font-size:9px;color:#555">黑料不打烊</span></td><td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">13</td><td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">5.7万</td><td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">5.3k</td><td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td></tr>
-<tr style="border-bottom:1px solid #1E1E20"><td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">5 小明<br><span style="font-size:9px;color:#555">黑料网</span></td><td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">11</td><td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">5.7万</td><td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">4.5k</td><td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td></tr>
-<tr style="border-bottom:1px solid #1E1E20"><td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">6 小红<br><span style="font-size:9px;color:#555">51吃瓜</span></td><td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">16</td><td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">4.8万</td><td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">2.4k</td><td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td></tr>
-<tr style="border-bottom:1px solid #1E1E20"><td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">7 成员A<br><span style="font-size:9px;color:#555">默认团队</span></td><td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">16</td><td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">3.7万</td><td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">1.1k</td><td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td></tr>
-<tr style="border-bottom:1px solid #1E1E20"><td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">8 小新<br><span style="font-size:9px;color:#555">黑料不打烊</span></td><td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">0</td><td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">0</td><td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">0</td><td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-25</td></tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;padding:7px 8px">🥇 苏伟<br><span style="font-size:9px;color:#555">每日大赛</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">145</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">903.4万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">15.6万</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-26</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#C0C0C0;font-weight:700;padding:7px 8px">🥈 昭昭<br><span style="font-size:9px;color:#555">默认团队</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">19</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">9.3万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">1.1k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#CD7F32;font-weight:700;padding:7px 8px">🥉 应易言<br><span style="font-size:9px;color:#555">默认团队</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">14</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">6.2万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">3.5k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">4 吉卜力<br><span style="font-size:9px;color:#555">黑料不打烊</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">13</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">5.7万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">5.3k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">5 小明<br><span style="font-size:9px;color:#555">黑料网</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">11</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">5.7万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">4.5k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">6 小红<br><span style="font-size:9px;color:#555">51吃瓜</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">16</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">4.8万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">2.4k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">7 成员A<br><span style="font-size:9px;color:#555">默认团队</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">16</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">3.7万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">1.1k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">8 小新<br><span style="font-size:9px;color:#555">黑料不打烊</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">0</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">0</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">0</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-25</td>
+</tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 
+  <div class="section">
+    <div class="card">
+      <div class="chdr"><div class="ctitle"><div class="dot3"></div>📡 新媒体数据（内网实时 · 需团队内部网络访问）</div></div>
+      <div class="cbdy" style="padding:12px">
+        <div style="background:#1a1a2e;border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:13px;color:#888;margin-bottom:10px">品宣部数据统筹平台</div>
+          <div style="font-size:20px;font-weight:700;color:#A855F7;margin-bottom:4px">http://76.13.214.108:8501/</div>
+          <div style="font-size:11px;color:#555;margin-bottom:16px">团队内部网络访问</div>
+          <a href="http://76.13.214.108:8501/" target="_blank" class="ext-btn" style="font-size:13px;padding:8px 20px">🔗 打开实时看板</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div class="stitle"><span class="si">🤖</span><span class="st">自动化工作流</span><div class="sl"></div></div>
     <div class="aGrid">
-      <div class="aCard">
-        <div class="aHdr">Agent 运行状态</div>
+      <div class="aCard"><div class="aHdr">Agent 运行状态</div>
         <div class="aRow"><span class="aL">品牌设计组 Agent</span><span class="aR aGreen">运行中</span></div>
         <div class="aRow"><span class="aL">内容运营组 Agent</span><span class="aR aGreen">运行中</span></div>
         <div class="aRow"><span class="aL">增长运营组 Agent</span><span class="aR aGreen">运行中</span></div>
         <div class="aRow"><span class="aL">新媒体一组 Agent</span><span class="aR aGreen">运行中</span></div>
         <div class="aRow"><span class="aL">新媒体二组 Agent</span><span class="aR aRed">离线</span></div>
       </div>
-      <div class="aCard">
-        <div class="aHdr">文档与协作</div>
+      <div class="aCard"><div class="aHdr">文档与协作</div>
         <div class="aRow"><span class="aL">本周文档更新</span><span class="aR">23 篇</span></div>
         <div class="aRow"><span class="aL">先驱负责人</span><span class="aR">雾岚</span></div>
         <div class="aRow"><span class="aL">Agent 工作流覆盖率</span><span class="aR">82%</span></div>
@@ -668,53 +524,7 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0F0F10;c
     </div>
   </div>
 
-  <!-- SECTION 7: New media -->
-  <div class="section">
-    <div class="stitle"><span class="si">📱</span><span class="st">新媒体数据</span><div class="sl"></div></div>
-    <div class="card">
-      <div class="chdr">
-        <div class="ctitle"><div class="dot3"></div>发布数据对比</div>
-        <select id="nmPeriod" onchange="updateNM()" style="margin-left:auto;background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:8px;padding:4px 10px;font-size:11px;font-family:inherit;cursor:pointer">
-          <option value="week">本周</option>
-          <option value="lastweek">对比上周</option>
-          <option value="month">本月</option>
-          <option value="today">今日</option>
-        </select>
-      </div>
-      <div class="cbdy">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:11px;font-weight:800;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">📸 新媒体一组 肖田</div>
-            <div class="nm-metrics" id="nm1-metrics">
-              <div class="nmm-row"><span class="nmm-lbl">发布量</span><span class="nmm-val" id="nm1-pub">48篇</span><span class="trend up" id="nm1-pub-trend">+12</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">粉丝</span><span class="nmm-val" id="nm1-fans">12.6万</span><span class="trend up" id="nm1-fans-trend">+2100</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val" id="nm1-inter">3.2万</span><span class="trend up" id="nm1-inter-trend">+3200</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">点赞率</span><span class="nmm-val" id="nm1-like">6.8%</span><span class="trend up" id="nm1-like-trend">+0.5%</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">完播率</span><span class="nmm-val" id="nm1-view">52%</span><span class="trend down" id="nm1-view-trend">-2%</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">转化率</span><span class="nmm-val" id="nm1-conv">3.4%</span><span class="trend up" id="nm1-conv-trend">+0.3%</span></div>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="font-size:11px;font-weight:800;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">🎙️ 新媒体二组 巧言</div>
-            <div class="nm-metrics" id="nm2-metrics">
-              <div class="nmm-row"><span class="nmm-lbl">发布量</span><span class="nmm-val" id="nm2-pub">36篇</span><span class="trend up" id="nm2-pub-trend">+8</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">粉丝</span><span class="nmm-val" id="nm2-fans">9.8万</span><span class="trend up" id="nm2-fans-trend">+1600</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val" id="nm2-inter">2.7万</span><span class="trend up" id="nm2-inter-trend">+1800</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">点赞率</span><span class="nmm-val" id="nm2-like">5.9%</span><span class="trend up" id="nm2-like-trend">+0.3%</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">完播率</span><span class="nmm-val" id="nm2-view">48%</span><span class="trend up" id="nm2-view-trend">+1%</span></div>
-              <div class="nmm-row"><span class="nmm-lbl">转化率</span><span class="nmm-val" id="nm2-conv">2.8%</span><span class="trend down" id="nm2-conv-trend">-0.2%</span></div>
-            </div>
-          </div>
-        </div>
-        <div style="height:160px"><canvas id="nmChart1"></canvas></div>
-        <div style="height:160px;margin-top:12px"><canvas id="nmChart2"></canvas></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">品宣部 BI 看板 · Google Sheets + 新媒体数据 · 更新于 2026-03-26 · @wulan_agent01_bot</div>
+  <div class="footer">品宣部 BI 看板 · 数据来源：Google Sheets · @wulan_agent01_bot</div>
 
 <script>
 (function(){
@@ -725,180 +535,114 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0F0F10;c
   }
   tick();setInterval(tick,1000);
 
-  // Planning data
-  var planData = {
-    thisweek: [
-      {label:'🔴 昨日完成',val:4,unit:'件',items:['黑料网 Logo定稿','51吃瓜 视频边框交付','每日大赛 BGM确认','黑料不打烊 IP表情包'],color:'red'},
-      {label:'🟠 今日计划',val:6,unit:'件',items:['黑料网 APP UI验收','每日大赛 视频模板','51吃瓜 品牌规范文档','黑料不打烊 视频剪辑'],color:'orange'},
-      {label:'🔵 本周计划',val:12,unit:'件',items:['黑料网 AI动画剧本','每日大赛 新媒体素材','51吃瓜 短视频模板','品牌物料归档整理'],color:'blue'},
-      {label:'🟢 下周计划',val:8,unit:'件',items:['4月活动方案初稿','竞品调研报告','Q2品牌规划','BI看板数据接入'],color:'green'}
-    ],
-    lastweek: [
-      {label:'🔴 上周完成',val:7,unit:'件',items:['黑料网 品牌视觉定稿','51吃瓜 水印交付','每日大赛 AI模板','黑料不打烊 视频边框','51吃瓜 短视频产出'],color:'red'},
-      {label:'🟠 本周计划',val:9,unit:'件',items:['黑料网 新媒体素材','每日大赛 域名确认','51吃瓜 视频剪辑','黑料不打烊 品牌规范'],color:'orange'},
-      {label:'🔵 本月累计',val:28,unit:'件',items:['品牌设计 19件','视频制作 9件','物料归档进行中'],color:'blue'},
-      {label:'🟢 下周计划',val:10,unit:'件',items:['4月活动方案','Q2品牌规划','竞品调研','BI看板升级'],color:'green'}
-    ],
-    thismonth: [
-      {label:'🔴 本月完成',val:28,unit:'件',items:['设计需求 19件','视频交付 9件','品牌物料归档'],color:'red'},
-      {label:'🟠 进行中',val:16,unit:'件',items:['APP UI制作','视频边框','新媒体素材'],color:'orange'},
-      {label:'🔵 本月计划',val:44,unit:'件',items:['品牌视觉升级','视频流水线优化','新媒体数据接入'],color:'blue'},
-      {label:'🟢 下月计划',val:18,unit:'件',items:['4月活动方案','Q2品牌规划','BI看板升级','竞品调研报告'],color:'green'}
-    ]
-  };
-
-  function updatePlan(){
-    var p = document.getElementById('planPeriod').value;
-    var items = planData[p];
-    var html = '';
-    var colorMap = {red:'d-red',orange:'d-orange',blue:'d-blue',green:'d-green'};
-    var boxMap = {red:'red',orange:'orange',blue:'blue',green:'green'};
-    for(var i=0;i<items.length;i++){
-      var it = items[i];
-      var itemLis = it.items.map(function(x){ return '<div class="plan-item"><div class="plan-dot '+colorMap[it.color]+'"></div>'+x+'</div>'; }).join('');
-      html += '<div class="plan-box '+boxMap[it.color]+'"><div class="plan-lbl">'+it.label+'</div><div class="plan-val">'+it.val+'</div><div class="plan-sub">'+it.unit+'</div><div class="plan-items">'+itemLis+'</div></div>';
-    }
-    document.getElementById('planGrid').innerHTML = html;
-  }
-  window.updatePlan = updatePlan;
-  updatePlan();
-
-  // New media data by period
-  var nmData = {
-    week: {
-      nm1: {pub:'48篇',pubT:'+12',fans:'12.6万',fansT:'+2100',inter:'3.2万',interT:'+3200',like:'6.8%',likeT:'+0.5%',view:'52%',viewT:'-2%',conv:'3.4%',convT:'+0.3%',
-            chart:[12,15,8,11,16,10,14]},
-      nm2: {pub:'36篇',pubT:'+8',fans:'9.8万',fansT:'+1600',inter:'2.7万',interT:'+1800',like:'5.9%',likeT:'+0.3%',view:'48%',viewT:'+1%',conv:'2.8%',convT:'-0.2%',
-            chart:[8,10,6,9,12,7,11]}
-    },
-    lastweek: {
-      nm1: {pub:'36篇',pubT:'-4',fans:'12.4万',fansT:'+800',inter:'2.9万',interT:'-500',like:'6.3%',likeT:'-0.2%',view:'54%',viewT:'+3%',conv:'3.1%',convT:'-0.1%',
-            chart:[9,11,7,8,12,9,8]},
-      nm2: {pub:'28篇',pubT:'-3',fans:'9.6万',fansT:'+1200',inter:'2.5万',interT:'-300',like:'5.6%',likeT:'-0.1%',view:'47%',viewT:'-2%',conv:'3.0%',convT:'+0.1%',
-            chart:[6,8,5,7,9,6,7]}
-    },
-    month: {
-      nm1: {pub:'186篇',pubT:'+24',fans:'14.2万',fansT:'+8200',inter:'12.8万',interT:'+12800',like:'7.1%',likeT:'+1.2%',view:'55%',viewT:'-3%',conv:'3.6%',convT:'+0.8%',
-            chart:[22,28,30,25,32,28,26]},
-      nm2: {pub:'142篇',pubT:'+18',fans:'10.8万',fansT:'+5600',inter:'10.2万',interT:'+9200',like:'6.2%',likeT:'+0.8%',view:'50%',viewT:'+2%',conv:'2.9%',convT:'-0.3%',
-            chart:[18,22,24,20,28,24,22]}
-    },
-    today: {
-      nm1: {pub:'8篇',pubT:'+2',fans:'12.61万',fansT:'+120',inter:'5200',interT:'+800',like:'7.2%',likeT:'+0.8%',view:'58%',viewT:'+3%',conv:'3.8%',convT:'+0.2%',
-            chart:[8]},
-      nm2: {pub:'6篇',pubT:'+1',fans:'9.81万',fansT:'+90',inter:'4100',interT:'+600',like:'6.1%',likeT:'+0.4%',view:'52%',viewT:'+2%',conv:'3.0%',convT:'-0.1%',
-            chart:[6]}
-    }
-  };
-
-  var nmChart1, nmChart2;
-
-  function updateNM(){
-    var p = document.getElementById('nmPeriod').value;
-    var d = nmData[p];
-    // Update metrics
-    document.getElementById('nm1-pub').textContent = d.nm1.pub;
-    document.getElementById('nm1-pub-trend').textContent = d.nm1.pubT;
-    document.getElementById('nm1-pub-trend').className = 'trend ' + (d.nm1.pubT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm1-fans').textContent = d.nm1.fans;
-    document.getElementById('nm1-fans-trend').textContent = d.nm1.fansT;
-    document.getElementById('nm1-fans-trend').className = 'trend ' + (d.nm1.fansT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm1-inter').textContent = d.nm1.inter;
-    document.getElementById('nm1-inter-trend').textContent = d.nm1.interT;
-    document.getElementById('nm1-inter-trend').className = 'trend ' + (d.nm1.interT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm1-like').textContent = d.nm1.like;
-    document.getElementById('nm1-like-trend').textContent = d.nm1.likeT;
-    document.getElementById('nm1-like-trend').className = 'trend ' + (d.nm1.likeT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm1-view').textContent = d.nm1.view;
-    document.getElementById('nm1-view-trend').textContent = d.nm1.viewT;
-    document.getElementById('nm1-view-trend').className = 'trend ' + (d.nm1.viewT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm1-conv').textContent = d.nm1.conv;
-    document.getElementById('nm1-conv-trend').textContent = d.nm1.convT;
-    document.getElementById('nm1-conv-trend').className = 'trend ' + (d.nm1.convT.indexOf('-')===0?'down':'up');
-
-    document.getElementById('nm2-pub').textContent = d.nm2.pub;
-    document.getElementById('nm2-pub-trend').textContent = d.nm2.pubT;
-    document.getElementById('nm2-pub-trend').className = 'trend ' + (d.nm2.pubT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm2-fans').textContent = d.nm2.fans;
-    document.getElementById('nm2-fans-trend').textContent = d.nm2.fansT;
-    document.getElementById('nm2-fans-trend').className = 'trend ' + (d.nm2.fansT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm2-inter').textContent = d.nm2.inter;
-    document.getElementById('nm2-inter-trend').textContent = d.nm2.interT;
-    document.getElementById('nm2-inter-trend').className = 'trend ' + (d.nm2.interT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm2-like').textContent = d.nm2.like;
-    document.getElementById('nm2-like-trend').textContent = d.nm2.likeT;
-    document.getElementById('nm2-like-trend').className = 'trend ' + (d.nm2.likeT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm2-view').textContent = d.nm2.view;
-    document.getElementById('nm2-view-trend').textContent = d.nm2.viewT;
-    document.getElementById('nm2-view-trend').className = 'trend ' + (d.nm2.viewT.indexOf('-')===0?'down':'up');
-    document.getElementById('nm2-conv').textContent = d.nm2.conv;
-    document.getElementById('nm2-conv-trend').textContent = d.nm2.convT;
-    document.getElementById('nm2-conv-trend').className = 'trend ' + (d.nm2.convT.indexOf('-')===0?'down':'up');
-
-    // Update charts
-    var labels1 = p==='today'?['今日']:['周一','周二','周三','周四','周五','周六','周日'];
-    if(nmChart1){nmChart1.data.labels=labels1;nmChart1.data.datasets[0].data=d.nm1.chart;nmChart1.update();}
-    if(nmChart2){nmChart2.data.labels=labels1;nmChart2.data.datasets[0].data=d.nm2.chart;nmChart2.update();}
-  }
-
   Chart.defaults.color='#888';
   Chart.defaults.font.family="'PingFang SC','Microsoft YaHei',sans-serif";
 
-  var nmLbls = ['周一','周二','周三','周四','周五','周六','周日'];
-  nmChart1 = new Chart(document.getElementById('nmChart1'),{
-    type:'bar',
+  // Pie chart
+  new Chart(document.getElementById('cPie'),{
+    type:'doughnut',
     data:{
-      labels:nmLbls,
-      datasets:[{
-        label:'肖田',
-        data:[12,15,8,11,16,10,14],
-        backgroundColor:'rgba(59,130,246,0.7)',
-        borderColor:'#3B82F6',
-        borderWidth:1,
-        borderRadius:4,
-      }]
+      labels:['已完成 7件','进行中 7件','排期中 48件'],
+      datasets:[{data:[7,7,48],backgroundColor:['#22C55E','#FF7A00','#3B82F6'],borderWidth:0}]
     },
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}},
-        y:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}}
-      }
-    }
+    options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}}}}
   });
 
-  nmChart2 = new Chart(document.getElementById('nmChart2'),{
-    type:'bar',
-    data:{
-      labels:nmLbls,
-      datasets:[{
-        label:'巧言',
-        data:[8,10,6,9,12,7,11],
-        backgroundColor:'rgba(255,122,0,0.7)',
-        borderColor:'#FF7A00',
-        borderWidth:1,
-        borderRadius:4,
-      }]
+  // Planning data
+  var planData={
+    thisweek:[
+      {l:'🔴 昨日完成',v:4,u:'件',it:['黑料网 Logo定稿','51吃瓜 视频边框交付','每日大赛 BGM确认','黑料不打烊 IP表情包'],c:'rb'},
+      {l:'🟠 今日计划',v:6,u:'件',it:['黑料网 APP UI验收','每日大赛 视频模板','51吃瓜 品牌规范文档','黑料不打烊 视频剪辑'],c:'ob'},
+      {l:'🔵 本周计划',v:12,u:'件',it:['黑料网 AI动画剧本','每日大赛 新媒体素材','51吃瓜 短视频模板','品牌物料归档整理'],c:'bb'},
+      {l:'🟢 下周计划',v:8,u:'件',it:['4月活动方案初稿','竞品调研报告','Q2品牌规划','BI看板数据接入'],c:'gb'}
+    ],
+    lastweek:[
+      {l:'🔴 上周完成',v:7,u:'件',it:['黑料网 品牌视觉定稿','51吃瓜 水印交付','每日大赛 AI模板','黑料不打烊 视频边框'],c:'rb'},
+      {l:'🟠 本周计划',v:9,u:'件',it:['黑料网 新媒体素材','每日大赛 域名确认','51吃瓜 视频剪辑','黑料不打烊 品牌规范'],c:'ob'},
+      {l:'🔵 本月累计',v:28,u:'件',it:['品牌设计 19件','视频制作 9件','物料归档进行中'],c:'bb'},
+      {l:'🟢 下周计划',v:10,u:'件',it:['4月活动方案','Q2品牌规划','竞品调研','BI看板升级'],c:'gb'}
+    ],
+    thismonth:[
+      {l:'🔴 本月完成',v:28,u:'件',it:['设计需求 19件','视频交付 9件','品牌物料归档'],c:'rb'},
+      {l:'🟠 进行中',v:16,u:'件',it:['APP UI制作','视频边框','新媒体素材'],c:'ob'},
+      {l:'🔵 本月计划',v:44,u:'件',it:['品牌视觉升级','视频流水线优化','新媒体数据接入'],c:'bb'},
+      {l:'🟢 下月计划',v:18,u:'件',it:['4月活动方案','Q2品牌规划','BI看板升级','竞品调研报告'],c:'gb'}
+    ]
+  };
+  var colorDot={rb:'dp',ob:'do',bb:'db',gb:'dg'};
+  function updatePlan(){
+    var p=document.getElementById('planPeriod').value,html='';
+    planData[p].forEach(function(x){
+      var items=x.it.map(function(i){return'<div class="plan-item"><div class="plan-dot '+colorDot[x.c]+'"></div>'+i+'</div>';}).join('');
+      html+='<div class="plan-box '+x.c+'"><div class="plan-lbl">'+x.l+'</div><div class="plan-val">'+x.v+'</div><div class="plan-sub">'+x.u+'</div><div class="plan-items">'+items+'</div></div>';
+    });
+    document.getElementById('planGrid').innerHTML=html;
+  }
+  window.updatePlan=updatePlan;updatePlan();
+
+  // New media data
+  var nmD={
+    week:{
+      n1:{p:'48篇',pt:'+12',f:'12.6万',ft:'+2100',i:'3.2万',it:'+3200',l:'6.8%',lt:'+0.5%',v:'52%',vt:'-2%',c:'3.4%',ct:'+0.3%',d:[12,15,8,11,16,10,14]},
+      n2:{p:'36篇',pt:'+8',f:'9.8万',ft:'+1600',i:'2.7万',it:'+1800',l:'5.9%',lt:'+0.3%',v:'48%',vt:'+1%',c:'2.8%',ct:'-0.2%',d:[8,10,6,9,12,7,11]}
     },
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}},
-        y:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}}
-      }
+    lastweek:{
+      n1:{p:'36篇',pt:'-4',f:'12.4万',ft:'+800',i:'2.9万',it:'-500',l:'6.3%',lt:'-0.2%',v:'54%',vt:'+3%',c:'3.1%',ct:'-0.1%',d:[9,11,7,8,12,9,8]},
+      n2:{p:'28篇',pt:'-3',f:'9.6万',ft:'+1200',i:'2.5万',it:'-300',l:'5.6%',lt:'-0.1%',v:'47%',vt:'-2%',c:'3.0%',ct:'+0.1%',d:[6,8,5,7,9,6,7]}
+    },
+    month:{
+      n1:{p:'186篇',pt:'+24',f:'14.2万',ft:'+8200',i:'12.8万',it:'+12800',l:'7.1%',lt:'+1.2%',v:'55%',vt:'-3%',c:'3.6%',ct:'+0.8%',d:[22,28,30,25,32,28,26]},
+      n2:{p:'142篇',pt:'+18',f:'10.8万',ft:'+5600',i:'10.2万',it:'+9200',l:'6.2%',lt:'+0.8%',v:'50%',vt:'+2%',c:'2.9%',ct:'-0.3%',d:[18,22,24,20,28,24,22]}
+    },
+    today:{
+      n1:{p:'8篇',pt:'+2',f:'12.61万',ft:'+120',i:'5200',it:'+800',l:'7.2%',lt:'+0.8%',v:'58%',vt:'+3%',c:'3.8%',ct:'+0.2%',d:[8]},
+      n2:{p:'6篇',pt:'+1',f:'9.81万',ft:'+90',i:'4100',it:'+600',l:'6.1%',lt:'+0.4%',v:'52%',vt:'+2%',c:'3.0%',ct:'-0.1%',d:[6]}
     }
+  };
+
+  function setNM(id,src){
+    document.getElementById(id+'-pub').textContent=src.p;
+    var pt=document.getElementById(id+'-pt');pt.textContent=src.pt;pt.className='trend '+(src.pt.indexOf('-')===0?'down':'up');
+    document.getElementById(id+'-fan').textContent=src.f;
+    var ft=document.getElementById(id+'-ft');ft.textContent=src.ft;ft.className='trend '+(src.ft.indexOf('-')===0?'down':'up');
+    document.getElementById(id+'-int').textContent=src.i;
+    var it=document.getElementById(id+'-it');it.textContent=src.it;it.className='trend '+(src.it.indexOf('-')===0?'down':'up');
+    document.getElementById(id+'-lik').textContent=src.l;
+    var lt=document.getElementById(id+'-lt');lt.textContent=src.lt;lt.className='trend '+(src.lt.indexOf('-')===0?'down':'up');
+    document.getElementById(id+'-viw').textContent=src.v;
+    var vt=document.getElementById(id+'-vt');vt.textContent=src.vt;vt.className='trend '+(src.vt.indexOf('-')===0?'down':'up');
+    document.getElementById(id+'-cnv').textContent=src.c;
+    var ct=document.getElementById(id+'-ct');ct.textContent=src.ct;ct.className='trend '+(src.ct.indexOf('-')===0?'down':'up');
+  }
+
+  var nmC1,nmC2;
+  function updateNM(){
+    var p1=document.getElementById('nm1Sel').value;
+    var p2=document.getElementById('nm2Sel').value;
+    setNM('nm1',nmD[p1].n1);
+    setNM('nm2',nmD[p2].n2);
+    var lbl=['周一','周二','周三','周四','周五','周六','周日'];
+    if(nmC1){nmC1.data.labels=lbl;nmC1.data.datasets[0].data=nmD[p1].n1.d;nmC1.update();}
+    if(nmC2){nmC2.data.labels=lbl;nmC2.data.datasets[0].data=nmD[p2].n2.d;nmC2.update();}
+  }
+  window.updateNM=updateNM;
+
+  nmC1=new Chart(document.getElementById('nmChart1'),{
+    type:'bar',
+    data:{labels:['周一','周二','周三','周四','周五','周六','周日'],datasets:[{label:'肖田',data:[12,15,8,11,16,10,14],backgroundColor:'rgba(59,130,246,0.7)',borderColor:'#3B82F6',borderWidth:1,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}},y:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}}}}
   });
 
-  // Expose for dropdown
-  window.updateNM = updateNM;
+  nmC2=new Chart(document.getElementById('nmChart2'),{
+    type:'bar',
+    data:{labels:['周一','周二','周三','周四','周五','周六','周日'],datasets:[{label:'巧言',data:[8,10,6,9,12,7,11],backgroundColor:'rgba(255,122,0,0.7)',borderColor:'#FF7A00',borderWidth:1,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}},y:{grid:{color:'#1E1E20'},ticks:{font:{size:9}}}}}
+  });
+
   updateNM();
 })();
 
-  // New media real data
+  // Real data from team_stats.db (品宣部数据统筹平台)
   var nmLabels = ["03-13", "03-14", "03-15", "03-16", "03-17", "03-18", "03-19", "03-20", "03-21", "03-22", "03-23", "03-24", "03-25", "03-26"];
   var nmTrendPosts = [75, 78, 80, 62, 81, 86, 90, 95, 72, 81, 83, 89, 0, 145];
   var teamDates = ["03-23", "03-24", "03-25", "03-26"];
