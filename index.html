@@ -116,7 +116,7 @@ select{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:8px;pad
 .nmIcon{font-size:16px}.nmName{font-size:12px;font-weight:900;color:#F5F0E8}.nmMgr{font-size:9px;color:#888;margin-left:auto}
 select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:8px;padding:3px 8px;font-size:10px;font-family:inherit;cursor:pointer}
 .nmBody{padding:10px 12px}
-.nm-metrics{display:flex;flex-direction:column;gap:4px}
+.nm-metrics{display:flex;flex-direction:column;gap:4px}.nmm-unit{font-size:10px;color:#666;margin-left:2px}.nmm-bar{height:6px;background:#222225;border-radius:3px;margin-top:6px}.nmm-bar-fill{height:6px;border-radius:3px}
 .nmm-row{display:flex;align-items:center;gap:8px;padding:5px 9px;background:#222225;border-radius:8px}
 .nmm-lbl{font-size:11px;color:#888;width:44px;flex-shrink:0}
 .nmm-val{font-size:12px;font-weight:900;color:#FFF;font-family:'Courier New',monospace;flex:1}
@@ -310,10 +310,10 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
 
   <div class="section" style="margin-top:-8px">
     <div class="kstrip">
-      <div class="kbox k-purple"><div class="kval">2499</div><div class="ksub">总发布</div><div class="knote">全时期</div></div>
-      <div class="kbox k-green"><div class="kval">2106.4万</div><div class="ksub">总浏览</div><div class="knote">全时期</div></div>
-      <div class="kbox k-orange"><div class="kval">74.3万</div><div class="ksub">总互动</div><div class="knote">全时期</div></div>
-      <div class="kbox k-blue"><div class="kval">416</div><div class="ksub">破万</div><div class="knote">全时期</div></div>
+      <div class="kbox purple"><div class="kval">2499</div><div class="ksub">总发布</div><div class="knote">全时期</div></div>
+      <div class="kbox green"><div class="kval">2106.4万</div><div class="ksub">总浏览</div><div class="knote">全时期</div></div>
+      <div class="kbox orange"><div class="kval">74.3万</div><div class="ksub">总互动</div><div class="knote">全时期</div></div>
+      <div class="kbox blue"><div class="kval">416</div><div class="ksub">破万</div><div class="knote">全时期</div></div>
     </div>
   </div>
 
@@ -325,84 +325,84 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
   </div>
 
   <div class="section">
-    <div class="nm-grid">
-      <div class="nm-card">
-        <div class="nm-hdr">
-          <span class="nm-icon" style="background:#A855F720;color:#A855F7">默认</span>
-          <span class="nm-name">默认团队</span>
+    <div class="nmGrid">
+      <div class="nmCard">
+        <div class="nmHdr">
+          <span class="nmIcon" style="background:#A855F720;color:#A855F7">默认</span>
+          <span class="nmName">默认团队</span>
         </div>
-        <div class="nm-body">
+        <div class="nmBody">
           <div class="nm-metrics">
-            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#A855F7">1191</span><span class="nm-unit">篇</span></div>
-            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">605.7万</span></div>
-            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">28.9万</span></div>
-            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">204</span><span class="nm-unit">条</span></div>
-            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">617</span><span class="nm-unit">条</span></div>
-            <div class="nm-bar"><div style="width:100%;background:#A855F7" class="nm-bar-fill"></div></div>
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#A855F7">1191</span><span class="nmm-unit">篇</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">605.7万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">28.9万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">204</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">617</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-bar"><div style="width:100%;background:#A855F7" class="nmm-bar-fill"></div></div>
           </div>
         </div>
       </div>
-      <div class="nm-card">
-        <div class="nm-hdr">
-          <span class="nm-icon" style="background:#3B82F620;color:#3B82F6">黑料</span>
-          <span class="nm-name">黑料网</span>
+      <div class="nmCard">
+        <div class="nmHdr">
+          <span class="nmIcon" style="background:#3B82F620;color:#3B82F6">黑料</span>
+          <span class="nmName">黑料网</span>
         </div>
-        <div class="nm-body">
+        <div class="nmBody">
           <div class="nm-metrics">
-            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#3B82F6">399</span><span class="nm-unit">篇</span></div>
-            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">199.6万</span></div>
-            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">11.1万</span></div>
-            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">81</span><span class="nm-unit">条</span></div>
-            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">192</span><span class="nm-unit">条</span></div>
-            <div class="nm-bar"><div style="width:33%;background:#3B82F6" class="nm-bar-fill"></div></div>
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#3B82F6">399</span><span class="nmm-unit">篇</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">199.6万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">11.1万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">81</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">192</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-bar"><div style="width:33%;background:#3B82F6" class="nmm-bar-fill"></div></div>
           </div>
         </div>
       </div>
-      <div class="nm-card">
-        <div class="nm-hdr">
-          <span class="nm-icon" style="background:#22C55E20;color:#22C55E">51</span>
-          <span class="nm-name">51吃瓜</span>
+      <div class="nmCard">
+        <div class="nmHdr">
+          <span class="nmIcon" style="background:#22C55E20;color:#22C55E">51</span>
+          <span class="nmName">51吃瓜</span>
         </div>
-        <div class="nm-body">
+        <div class="nmBody">
           <div class="nm-metrics">
-            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#22C55E">388</span><span class="nm-unit">篇</span></div>
-            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">183.3万</span></div>
-            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">7.4万</span></div>
-            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">56</span><span class="nm-unit">条</span></div>
-            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">159</span><span class="nm-unit">条</span></div>
-            <div class="nm-bar"><div style="width:32%;background:#22C55E" class="nm-bar-fill"></div></div>
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#22C55E">388</span><span class="nmm-unit">篇</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">183.3万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">7.4万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">56</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">159</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-bar"><div style="width:32%;background:#22C55E" class="nmm-bar-fill"></div></div>
           </div>
         </div>
       </div>
-      <div class="nm-card">
-        <div class="nm-hdr">
-          <span class="nm-icon" style="background:#FF7A0020;color:#FF7A00">黑料</span>
-          <span class="nm-name">黑料不打烊</span>
+      <div class="nmCard">
+        <div class="nmHdr">
+          <span class="nmIcon" style="background:#FF7A0020;color:#FF7A00">黑料</span>
+          <span class="nmName">黑料不打烊</span>
         </div>
-        <div class="nm-body">
+        <div class="nmBody">
           <div class="nm-metrics">
-            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#FF7A00">376</span><span class="nm-unit">篇</span></div>
-            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">214.3万</span></div>
-            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">11.4万</span></div>
-            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">75</span><span class="nm-unit">条</span></div>
-            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">190</span><span class="nm-unit">条</span></div>
-            <div class="nm-bar"><div style="width:31%;background:#FF7A00" class="nm-bar-fill"></div></div>
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#FF7A00">376</span><span class="nmm-unit">篇</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">214.3万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">11.4万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">75</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">190</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-bar"><div style="width:31%;background:#FF7A00" class="nmm-bar-fill"></div></div>
           </div>
         </div>
       </div>
-      <div class="nm-card">
-        <div class="nm-hdr">
-          <span class="nm-icon" style="background:#EF444420;color:#EF4444">每日</span>
-          <span class="nm-name">每日大赛</span>
+      <div class="nmCard">
+        <div class="nmHdr">
+          <span class="nmIcon" style="background:#EF444420;color:#EF4444">每日</span>
+          <span class="nmName">每日大赛</span>
         </div>
-        <div class="nm-body">
+        <div class="nmBody">
           <div class="nm-metrics">
-            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#EF4444">145</span><span class="nm-unit">篇</span></div>
-            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">903.4万</span></div>
-            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">15.6万</span></div>
-            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">0</span><span class="nm-unit">条</span></div>
-            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">0</span><span class="nm-unit">条</span></div>
-            <div class="nm-bar"><div style="width:12%;background:#EF4444" class="nm-bar-fill"></div></div>
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" style="color:#EF4444">145</span><span class="nmm-unit">篇</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">浏览</span><span class="nmm-val">903.4万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val">15.6万</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">破万</span><span class="nmm-val">0</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">收录</span><span class="nmm-val">0</span><span class="nmm-unit">条</span></div>
+            <div class="nmm-bar"><div style="width:12%;background:#EF4444" class="nmm-bar-fill"></div></div>
           </div>
         </div>
       </div>
@@ -524,7 +524,52 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
     </div>
   </div>
 
-  <div class="footer">品宣部 BI 看板 · 数据来源：Google Sheets · @wulan_agent01_bot</div>
+  <!-- NEW MEDIA -->
+  <div class="section">
+    <div class="stitle"><span class="si">📱</span><span class="st">新媒体数据</span><div class="sl"></div></div>
+    <div class="nmGrid">
+      <div class="nmCard">
+        <div class="nmHdr"><span class="nmIcon">📸</span><span class="nmName">新媒体一组</span><span class="nmMgr">肖田</span>
+          <select class="nm-sel" id="nm1Sel" onchange="updateNM()" style="margin-left:auto">
+            <option value="week">本周</option><option value="lastweek">对比上周</option><option value="month">本月</option><option value="today">今日</option>
+          </select>
+        </div>
+        <div class="nmBody">
+          <div class="nm-metrics" id="nm1m">
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" id="nm1-pub">48篇</span><span class="trend up" id="nm1-pt">+12</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">粉丝</span><span class="nmm-val" id="nm1-fan">12.6万</span><span class="trend up" id="nm1-ft">+2100</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val" id="nm1-int">3.2万</span><span class="trend up" id="nm1-it">+3200</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">点赞率</span><span class="nmm-val" id="nm1-lik">6.8%</span><span class="trend up" id="nm1-lt">+0.5%</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">完播率</span><span class="nmm-val" id="nm1-viw">52%</span><span class="trend down" id="nm1-vt">-2%</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">转化率</span><span class="nmm-val" id="nm1-cnv">3.4%</span><span class="trend up" id="nm1-ct">+0.3%</span></div>
+          </div>
+          <div class="nmchart-wrap"><canvas id="nmChart1"></canvas></div>
+        </div>
+      </div>
+      <div class="nmCard">
+        <div class="nmHdr"><span class="nmIcon">🎙️</span><span class="nmName">新媒体二组</span><span class="nmMgr">巧言</span>
+          <select class="nm-sel" id="nm2Sel" onchange="updateNM()" style="margin-left:auto">
+            <option value="week">本周</option><option value="lastweek">对比上周</option><option value="month">本月</option><option value="today">今日</option>
+          </select>
+        </div>
+        <div class="nmBody">
+          <div class="nm-metrics" id="nm2m">
+            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" id="nm2-pub">36篇</span><span class="trend up" id="nm2-pt">+8</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">粉丝</span><span class="nmm-val" id="nm2-fan">9.8万</span><span class="trend up" id="nm2-ft">+1600</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val" id="nm2-int">2.7万</span><span class="trend up" id="nm2-it">+1800</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">点赞率</span><span class="nmm-val" id="nm2-lik">5.9%</span><span class="trend up" id="nm2-lt">+0.3%</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">完播率</span><span class="nmm-val" id="nm2-viw">48%</span><span class="trend up" id="nm2-vt">+1%</span></div>
+            <div class="nmm-row"><span class="nmm-lbl">转化率</span><span class="nmm-val" id="nm2-cnv">2.8%</span><span class="trend down" id="nm2-ct">-0.2%</span></div>
+          </div>
+          <div class="nmchart-wrap"><canvas id="nmChart2"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">品宣部 BI 看板 · 数据来源：Google Sheets · @wulan_agent01_bot</div>
 
 <script>
 (function(){
@@ -581,10 +626,7 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
   window.updatePlan=updatePlan;updatePlan();
 
   // New media data
-  
 
-  updateNM();
-})();
 
   // Real data from team_stats.db (品宣部数据统筹平台)
   var nmLabels = ["03-13", "03-14", "03-15", "03-16", "03-17", "03-18", "03-19", "03-20", "03-21", "03-22", "03-23", "03-24", "03-25", "03-26"];
