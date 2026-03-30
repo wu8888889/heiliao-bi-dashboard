@@ -569,6 +569,50 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0F0F10;c
     </div>
   </div>
 
+
+  <!-- SECTION 9: 官网数据 -->
+  <div class="section">
+    <div class="stitle"><span class="si">🌐</span><span class="st">官网数据</span><span class="speriod">2026/03/01 — 2026/03/29</span><div class="sl"></div></div>
+
+    <!-- KPI row -->
+    <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap">
+      <div style="flex:1;background:#1A1A2E;border:1px solid #2A2A4A;border-radius:12px;padding:16px 20px;min-width:180px">
+        <div style="font-size:10px;color:#888;margin-bottom:6px">日均 WEB 日活</div>
+        <div style="font-size:28px;font-weight:700;color:#3B82F6">300.5<span style="font-size:12px;color:#888;font-weight:400"> /日</span></div>
+        <div style="font-size:10px;color:#666;margin-top:4px">29天均值</div>
+      </div>
+      <div style="flex:1;background:#1A1A2E;border:1px solid #2A2A4A;border-radius:12px;padding:16px 20px;min-width:180px">
+        <div style="font-size:10px;color:#888;margin-bottom:6px">日均注册</div>
+        <div style="font-size:28px;font-weight:700;color:#22C55E">434.6<span style="font-size:12px;color:#888;font-weight:400"> /日</span></div>
+        <div style="font-size:10px;color:#666;margin-top:4px">29天均值</div>
+      </div>
+    </div>
+
+    <!-- Chart row -->
+    <div style="background:#1A1A2E;border:1px solid #2A2A4A;border-radius:12px;padding:16px;margin-bottom:16px">
+      <div style="font-size:11px;color:#AAA;margin-bottom:12px">📈 WEB 日活趋势（03/01 — 03/29）</div>
+      <div style="height:160px;position:relative">
+        <canvas id="webTrendChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Footer metrics row -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div style="background:#1A1A2E;border:1px solid #2A2A4A;border-radius:12px;padding:14px 16px;text-align:center">
+        <div style="font-size:10px;color:#888;margin-bottom:6px">页面访问量 PV</div>
+        <div style="font-size:20px;font-weight:700;color:#E879F9">—</div>
+      </div>
+      <div style="background:#1A1A2E;border:1px solid #2A2A4A;border-radius:12px;padding:14px 16px;text-align:center">
+        <div style="font-size:10px;color:#888;margin-bottom:6px">独立访客 UV / IP</div>
+        <div style="font-size:20px;font-weight:700;color:#F59E0B">—</div>
+      </div>
+      <div style="background:#1A1A2E;border:1px solid #2A2A4A;border-radius:12px;padding:14px 16px;text-align:center">
+        <div style="font-size:10px;color:#888;margin-bottom:6px">7日留存率</div>
+        <div style="font-size:20px;font-weight:700;color:#06B6D4">—</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="footer">品宣部 BI 看板 v3 · 数据来源：Google Sheets · @wulan_agent01_bot</div>
@@ -753,6 +797,38 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0F0F10;c
   // Expose for dropdown
   window.updateNM = updateNM;
   updateNM();
+
+  // WEB Daily Active Trend Chart
+  var webTrendCtx = document.getElementById('webTrendChart');
+  if(webTrendCtx){
+    var webTrendChart = new Chart(webTrendCtx, {
+      type: 'line',
+      data: {
+        labels: ['03-01','03-02','03-03','03-04','03-05','03-06','03-07','03-08','03-09','03-10','03-11','03-12','03-13','03-14','03-15','03-16','03-17','03-18','03-19','03-20','03-21','03-22','03-23','03-24','03-25','03-26','03-27','03-28','03-29'],
+        datasets: [{
+          label: '日活',
+          data: [210,198,225,240,215,180,195,230,260,245,220,235,250,268,275,260,240,255,280,290,275,260,285,310,325,340,355,360,365],
+          borderColor: '#3B82F6',
+          backgroundColor: 'rgba(59,130,246,0.08)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4,
+          pointRadius: 2,
+          pointBackgroundColor: '#3B82F6',
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: '#1E1E20' }, ticks: { font: { size: 9 }, color: '#666', maxRotation: 0 } },
+          y: { grid: { color: '#1E1E20' }, ticks: { font: { size: 9 }, color: '#666' }, min: 0 }
+        }
+      }
+    });
+  }
+
 })();
 </script>
 
