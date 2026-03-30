@@ -524,52 +524,7 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
     </div>
   </div>
 
-  <!-- NEW MEDIA -->
-  <div class="section">
-    <div class="stitle"><span class="si">📱</span><span class="st">新媒体数据</span><div class="sl"></div></div>
-    <div class="nmGrid">
-      <div class="nmCard">
-        <div class="nmHdr"><span class="nmIcon">📸</span><span class="nmName">新媒体一组</span><span class="nmMgr">肖田</span>
-          <select class="nm-sel" id="nm1Sel" onchange="updateNM()" style="margin-left:auto">
-            <option value="week">本周</option><option value="lastweek">对比上周</option><option value="month">本月</option><option value="today">今日</option>
-          </select>
-        </div>
-        <div class="nmBody">
-          <div class="nm-metrics" id="nm1m">
-            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" id="nm1-pub">48篇</span><span class="trend up" id="nm1-pt">+12</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">粉丝</span><span class="nmm-val" id="nm1-fan">12.6万</span><span class="trend up" id="nm1-ft">+2100</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val" id="nm1-int">3.2万</span><span class="trend up" id="nm1-it">+3200</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">点赞率</span><span class="nmm-val" id="nm1-lik">6.8%</span><span class="trend up" id="nm1-lt">+0.5%</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">完播率</span><span class="nmm-val" id="nm1-viw">52%</span><span class="trend down" id="nm1-vt">-2%</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">转化率</span><span class="nmm-val" id="nm1-cnv">3.4%</span><span class="trend up" id="nm1-ct">+0.3%</span></div>
-          </div>
-          <div class="nmchart-wrap"><canvas id="nmChart1"></canvas></div>
-        </div>
-      </div>
-      <div class="nmCard">
-        <div class="nmHdr"><span class="nmIcon">🎙️</span><span class="nmName">新媒体二组</span><span class="nmMgr">巧言</span>
-          <select class="nm-sel" id="nm2Sel" onchange="updateNM()" style="margin-left:auto">
-            <option value="week">本周</option><option value="lastweek">对比上周</option><option value="month">本月</option><option value="today">今日</option>
-          </select>
-        </div>
-        <div class="nmBody">
-          <div class="nm-metrics" id="nm2m">
-            <div class="nmm-row"><span class="nmm-lbl">发布</span><span class="nmm-val" id="nm2-pub">36篇</span><span class="trend up" id="nm2-pt">+8</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">粉丝</span><span class="nmm-val" id="nm2-fan">9.8万</span><span class="trend up" id="nm2-ft">+1600</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">互动</span><span class="nmm-val" id="nm2-int">2.7万</span><span class="trend up" id="nm2-it">+1800</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">点赞率</span><span class="nmm-val" id="nm2-lik">5.9%</span><span class="trend up" id="nm2-lt">+0.3%</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">完播率</span><span class="nmm-val" id="nm2-viw">48%</span><span class="trend up" id="nm2-vt">+1%</span></div>
-            <div class="nmm-row"><span class="nmm-lbl">转化率</span><span class="nmm-val" id="nm2-cnv">2.8%</span><span class="trend down" id="nm2-ct">-0.2%</span></div>
-          </div>
-          <div class="nmchart-wrap"><canvas id="nmChart2"></canvas></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">品宣部 BI 看板 · 数据来源：Google Sheets · @wulan_agent01_bot</div>
+  <div class="footer">品宣部 BI 看板 · 数据来源：Google Sheets · @wulan_agent01_bot</div>
 
 <script>
 (function(){
@@ -626,7 +581,10 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
   window.updatePlan=updatePlan;updatePlan();
 
   // New media data
+  
 
+  updateNM();
+})();
 
   // Real data from team_stats.db (品宣部数据统筹平台)
   var nmLabels = ["03-13", "03-14", "03-15", "03-16", "03-17", "03-18", "03-19", "03-20", "03-21", "03-22", "03-23", "03-24", "03-25", "03-26"];
@@ -646,11 +604,6 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
     data:{labels:teamDates, datasets:Object.keys(teamSeries).map(function(t){return {label:t, data:teamSeries[t], backgroundColor:teamColors[t]+'99', borderColor:teamColors[t], borderWidth:1, borderRadius:4};})},
     options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:true, position:'bottom', labels:{boxWidth:8, font:{size:9}}}}}, scales:{x:{stacked:true, grid:{color:'#1E1E20'}, ticks:{font:{size:9}}}, y:{stacked:true, grid:{color:'#1E1E20'}, ticks:{font:{size:9}}}}
   });
-
-</script>
-
-</body>
-</html>
 
 </script>
 
