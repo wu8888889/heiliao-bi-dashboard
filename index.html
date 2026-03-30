@@ -298,7 +298,214 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
     </div>
   </div>
 
-  <div class="stitle"><span class="si">🤖</span><span class="st">自动化工作流</span><div class="sl"></div></div>
+    <div class="divider">
+    <div class="divider-label">—— 新媒体数据 · <a href="http://76.13.214.108:8501/" target="_blank" style="color:#A855F7;text-decoration:none">📡 实时数据（内网）</a> · 更新于 2026-03-26 ——</div>
+  </div>
+
+  <div class="section">
+    <div class="stitle"><span class="si">📱</span><span class="st">新媒体数据看板</span>
+      <a href="http://76.13.214.108:8501/" target="_blank" class="ext-btn">📊 实时数据</a>
+    <div class="sl"></div></div>
+  </div>
+
+  <div class="section" style="margin-top:-8px">
+    <div class="kstrip">
+      <div class="kbox k-purple"><div class="kval">2499</div><div class="ksub">总发布</div><div class="knote">全时期</div></div>
+      <div class="kbox k-green"><div class="kval">2106.4万</div><div class="ksub">总浏览</div><div class="knote">全时期</div></div>
+      <div class="kbox k-orange"><div class="kval">74.3万</div><div class="ksub">总互动</div><div class="knote">全时期</div></div>
+      <div class="kbox k-blue"><div class="kval">416</div><div class="ksub">破万</div><div class="knote">全时期</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="chdr"><div class="ctitle"><div class="dot3"></div>每日发布趋势（近14天）</div></div>
+      <div class="cbdy"><div class="cwrap-lg"><canvas id="nmTrendChart"></canvas></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nm-grid">
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#A855F720;color:#A855F7">默认</span>
+          <span class="nm-name">默认团队</span>
+        </div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#A855F7">1191</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">605.7万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">28.9万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">204</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">617</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:100%;background:#A855F7" class="nm-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#3B82F620;color:#3B82F6">黑料</span>
+          <span class="nm-name">黑料网</span>
+        </div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#3B82F6">399</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">199.6万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">11.1万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">81</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">192</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:33%;background:#3B82F6" class="nm-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#22C55E20;color:#22C55E">51</span>
+          <span class="nm-name">51吃瓜</span>
+        </div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#22C55E">388</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">183.3万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">7.4万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">56</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">159</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:32%;background:#22C55E" class="nm-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#FF7A0020;color:#FF7A00">黑料</span>
+          <span class="nm-name">黑料不打烊</span>
+        </div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#FF7A00">376</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">214.3万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">11.4万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">75</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">190</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:31%;background:#FF7A00" class="nm-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="nm-card">
+        <div class="nm-hdr">
+          <span class="nm-icon" style="background:#EF444420;color:#EF4444">每日</span>
+          <span class="nm-name">每日大赛</span>
+        </div>
+        <div class="nm-body">
+          <div class="nm-metrics">
+            <div class="nm-row"><span class="nm-lbl">发布</span><span class="nm-val" style="color:#EF4444">145</span><span class="nm-unit">篇</span></div>
+            <div class="nm-row"><span class="nm-lbl">浏览</span><span class="nm-val">903.4万</span></div>
+            <div class="nm-row"><span class="nm-lbl">互动</span><span class="nm-val">15.6万</span></div>
+            <div class="nm-row"><span class="nm-lbl">破万</span><span class="nm-val">0</span><span class="nm-unit">条</span></div>
+            <div class="nm-row"><span class="nm-lbl">收录</span><span class="nm-val">0</span><span class="nm-unit">条</span></div>
+            <div class="nm-bar"><div style="width:12%;background:#EF4444" class="nm-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="chdr"><div class="ctitle"><div class="dot3"></div>各团队每日发布对比（03-23~03-26）</div></div>
+      <div class="cbdy"><div class="cwrap-lg"><canvas id="teamCompareChart"></canvas></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="chdr"><div class="ctitle"><div class="dot3"></div>成员排名 · 近期最新数据</div></div>
+      <div class="cbdy">
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr style="border-bottom:1px solid #232326">
+            <th style="font-size:9px;color:#666;letter-spacing:1px;text-transform:uppercase;text-align:left;padding:5px 8px;font-weight:600">成员</th>
+            <th style="font-size:9px;color:#666;letter-spacing:1px;text-transform:uppercase;text-align:right;padding:5px 8px;font-weight:600">发布</th>
+            <th style="font-size:9px;color:#666;letter-spacing:1px;text-transform:uppercase;text-align:right;padding:5px 8px;font-weight:600">浏览</th>
+            <th style="font-size:9px;color:#666;letter-spacing:1px;text-transform:uppercase;text-align:right;padding:5px 8px;font-weight:600">互动</th>
+            <th style="font-size:9px;color:#666;letter-spacing:1px;text-transform:uppercase;text-align:center;padding:5px 8px;font-weight:600">日期</th>
+          </tr></thead>
+          <tbody>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;padding:7px 8px">🥇 苏伟<br><span style="font-size:9px;color:#555">每日大赛</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">145</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">903.4万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">15.6万</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-26</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#C0C0C0;font-weight:700;padding:7px 8px">🥈 昭昭<br><span style="font-size:9px;color:#555">默认团队</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">19</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">9.3万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">1.1k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#CD7F32;font-weight:700;padding:7px 8px">🥉 应易言<br><span style="font-size:9px;color:#555">默认团队</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">14</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">6.2万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">3.5k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">4 吉卜力<br><span style="font-size:9px;color:#555">黑料不打烊</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">13</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">5.7万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">5.3k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">5 小明<br><span style="font-size:9px;color:#555">黑料网</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">11</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">5.7万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">4.5k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">6 小红<br><span style="font-size:9px;color:#555">51吃瓜</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">16</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">4.8万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">2.4k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">7 成员A<br><span style="font-size:9px;color:#555">默认团队</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">16</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">3.7万</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">1.1k</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-24</td>
+</tr>
+<tr style="border-bottom:1px solid #1E1E20">
+  <td style="font-size:11px;color:#555;font-weight:700;padding:7px 8px">8 小新<br><span style="font-size:9px;color:#555">黑料不打烊</span></td>
+  <td style="font-size:11px;color:#F5F0E8;font-weight:700;text-align:right;padding:7px 8px">0</td>
+  <td style="font-size:11px;color:#3B82F6;font-weight:700;text-align:right;padding:7px 8px">0</td>
+  <td style="font-size:11px;color:#FF7A00;font-weight:700;text-align:right;padding:7px 8px">0</td>
+  <td style="font-size:10px;color:#555;text-align:center;padding:7px 8px">03-25</td>
+</tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="chdr"><div class="ctitle"><div class="dot3"></div>📡 新媒体数据（内网实时 · 需团队内部网络访问）</div></div>
+      <div class="cbdy" style="padding:12px">
+        <div style="background:#1a1a2e;border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:13px;color:#888;margin-bottom:10px">品宣部数据统筹平台</div>
+          <div style="font-size:20px;font-weight:700;color:#A855F7;margin-bottom:4px">http://76.13.214.108:8501/</div>
+          <div style="font-size:11px;color:#555;margin-bottom:16px">团队内部网络访问</div>
+          <a href="http://76.13.214.108:8501/" target="_blank" class="ext-btn" style="font-size:13px;padding:8px 20px">🔗 打开实时看板</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="stitle"><span class="si">🤖</span><span class="st">自动化工作流</span><div class="sl"></div></div>
     <div class="aGrid">
       <div class="aCard"><div class="aHdr">Agent 运行状态</div>
         <div class="aRow"><span class="aL">品牌设计组 Agent</span><span class="aR aGreen">运行中</span></div>
@@ -479,6 +686,26 @@ select.nm-sel{background:#2A2A2E;color:#CCC;border:1px solid #444;border-radius:
 
   updateNM();
 })();
+
+  // Real data from team_stats.db (品宣部数据统筹平台)
+  var nmLabels = ["03-13", "03-14", "03-15", "03-16", "03-17", "03-18", "03-19", "03-20", "03-21", "03-22", "03-23", "03-24", "03-25", "03-26"];
+  var nmTrendPosts = [75, 78, 80, 62, 81, 86, 90, 95, 72, 81, 83, 89, 0, 145];
+  var teamDates = ["03-23", "03-24", "03-25", "03-26"];
+  var teamSeries = {"\u9ed8\u8ba4\u56e2\u961f": [35, 49, 0, 0], "\u9ed1\u6599\u7f51": [20, 11, 0, 0], "51\u5403\u74dc": [18, 16, 0, 0], "\u9ed1\u6599\u4e0d\u6253\u70ca": [10, 13, 0, 0], "\u6bcf\u65e5\u5927\u8d5b": [0, 0, 0, 145]};
+  var teamColors = {"\u9ed8\u8ba4\u56e2\u961f": "#A855F7", "\u9ed1\u6599\u7f51": "#3B82F6", "51\u5403\u74dc": "#22C55E", "\u9ed1\u6599\u4e0d\u6253\u70ca": "#FF7A00", "\u6bcf\u65e5\u5927\u8d5b": "#EF4444"};
+
+  var nmTrendChart = new Chart(document.getElementById('nmTrendChart'),{
+    type:'bar',
+    data:{labels:nmLabels, datasets:[{label:'发布量', data:nmTrendPosts, backgroundColor:'rgba(168,85,247,0.7)', borderColor:'#A855F7', borderWidth:1, borderRadius:4}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:'#1E1E20'}, ticks:{font:{size:9}}}, y:{grid:{color:'#1E1E20'}, ticks:{font:{size:9}}}}}
+  });
+
+  var teamCompareChart = new Chart(document.getElementById('teamCompareChart'),{
+    type:'bar',
+    data:{labels:teamDates, datasets:Object.keys(teamSeries).map(function(t){return {label:t, data:teamSeries[t], backgroundColor:teamColors[t]+'99', borderColor:teamColors[t], borderWidth:1, borderRadius:4};})},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:true, position:'bottom', labels:{boxWidth:8, font:{size:9}}}}}, scales:{x:{stacked:true, grid:{color:'#1E1E20'}, ticks:{font:{size:9}}}, y:{stacked:true, grid:{color:'#1E1E20'}, ticks:{font:{size:9}}}}
+  });
+
 </script>
 
 </body>
