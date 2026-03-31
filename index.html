@@ -7,20 +7,541 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *,::before,::after{box-sizing:border-box}
-html,body{margin:0;padding:0;width:100%;min-height:100%;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+html,body{margin:0;padding:0;width:100%;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
 :root{
-  --bg-main:#04070f;
-  --bg-panel:#0b101c;
-  --bg-card:#0f1524;
-  --bg-card-soft:#111a2d;
-  --border-color:#1d2a44;
-  --text-primary:#f4f7ff;
-  --text-secondary:#9da8c5;
-  --text-muted:#697699;
-  --brand-primary:#6672ff;
-  --brand-secondary:#13d5c3;
-  --danger:#ff4d66;
-  --warning:#ffbe5c;
-  --success:#34d399;
-  --shadow-glow:0 16px 32px rgba(11,17,34,.55);
+  --bg:#04070f;
+  --panel:#0b101c;
+  --card:#0f1524;
+  --card2:#111a2d;
+  --border:#1d2a44;
+  --t1:#f4f7ff;
+  --t2:#9da8c5;
+  --t3:#697699;
+  --blue:#6672ff;
+  --teal:#13d5c3;
+  --red:#ff4d66;
+  --amber:#ffbe5c;
+  --green:#34d399;
+  --glow:0 8px 24px rgba(11,17,34,.6);
 }
+body{
+  background:var(--bg);
+  color:var(--t1);
+  background-image:
+    radial-gradient(circle at 15% 15%,rgba(102,114,255,.15),transparent 30%),
+    radial-gradient(circle at 85% 10%,rgba(19,213,195,.12),transparent 28%);
+  min-height:100vh;
+}
+
+/* ── TOP NAV ── */
+.topnav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:52px;
+  background:var(--panel);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.logo{font-size:16px;font-weight:700;letter-spacing:.5px;background:linear-gradient(90deg,#6672ff,#13d5c3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-sub{font-size:10px;color:var(--t3);letter-spacing:2px;margin-top:1px}
+.tabs{display:flex;gap:4px;background:rgba(10,15,28,.8);border:1px solid var(--border);border-radius:999px;padding:4px}
+.tab{border:none;background:transparent;color:var(--t2);padding:6px 16px;border-radius:999px;cursor:pointer;font-size:12px;font-family:inherit;transition:all .2s}
+.tab:hover{color:var(--t1);background:rgba(102,114,255,.1)}
+.tab.on{background:rgba(102,114,255,.22);color:var(--t1)}
+.topright{display:flex;align-items:center;gap:8px}
+.clkbox,.onbox{border:1px solid var(--border);background:var(--card2);border-radius:8px;padding:5px 12px;font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px}
+.greendot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── META / WARNING ── */
+.metabar{display:flex;align-items:center;gap:16px;padding:5px 24px;background:rgba(11,16,28,.7);border-bottom:1px solid var(--border);font-size:11px;color:var(--t3)}
+.mdot{width:4px;height:4px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.warnbar{margin:10px 16px 0;padding:8px 14px;border-radius:8px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);font-size:12px;color:var(--green);display:flex;align-items:center;gap:8px}
+.warnbar .wtitle{font-weight:600;color:var(--t2);margin-right:4px}
+
+/* ── SCREENS ── */
+.screens{padding:10px 16px 20px}
+.screen{display:none}.screen.on{display:block}
+
+/* ── PANEL ── */
+.pnl{background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:var(--glow)}
+.pnl-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 14px 0;font-size:12px;font-weight:600;color:var(--t2);letter-spacing:.4px}
+.pnl-tag{font-size:10px;padding:2px 8px;border-radius:999px;background:rgba(102,114,255,.15);color:var(--blue)}
+
+/* ── GRID SYSTEM ── */
+.g3{display:grid;grid-template-columns:340px 1fr 260px;gap:10px;margin-bottom:10px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+.g3b{display:grid;grid-template-columns:300px 1fr 380px;gap:10px;margin-bottom:10px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+
+/* ── KPI CARD ── */
+.kpi{padding:14px 16px}
+.kpi .lbl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
+.kpi .lbl::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+.kpi .val{font-size:30px;font-weight:700;line-height:1.1;margin-top:4px}
+.kpi .delta{font-size:11px;margin-top:3px}
+.kpi .sub{font-size:10px;color:var(--t3);margin-top:2px}
+.up{color:var(--green)}.dn{color:var(--red)}.nu{color:var(--t3)}
+.cv{color:var(--teal)}.cb{color:var(--blue)}.cg{color:var(--green)}.ca{color:var(--amber)}.cr{color:var(--red)}
+
+/* ── PROJECT CARDS ── */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:11px 12px;border-left:3px solid}
+.pc.ok{border-left-color:var(--green)}
+.pc.warn{border-left-color:var(--amber)}
+.pc.bad{border-left-color:var(--red)}
+.pc-name{font-size:13px;font-weight:600}
+.pc-ver{font-size:10px;color:var(--t3);margin-top:1px;margin-bottom:5px}
+.pc-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.pc-status{display:inline-block;font-size:10px;padding:1px 7px;border-radius:999px;margin-bottom:6px}
+.s-ok{background:rgba(52,211,153,.15);color:var(--green)}
+.s-warn{background:rgba(255,190,92,.15);color:var(--amber)}
+.s-bad{background:rgba(255,77,102,.15);color:var(--red)}
+.pc-lbl{font-size:10px;color:var(--t3)}
+.pc-pct{font-size:11px;font-weight:600}
+.pbar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin:2px 0 5px;overflow:hidden}
+.pfill{height:100%;border-radius:2px}
+.p-blue{background:linear-gradient(90deg,#6672ff,#13d5c3)}
+.p-green{background:var(--green)}
+.p-amber{background:var(--amber)}
+.p-red{background:var(--red)}
+.sync{font-size:10px;margin-top:3px}
+.sync.ok{color:var(--green)}.sync.mismatch{color:var(--red)}
+
+/* ── TABLES ── */
+.dtbl{width:100%;border-collapse:collapse;font-size:11px}
+.dtbl th{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);padding:8px 10px 6px;border-bottom:1px solid var(--border);text-align:left;font-weight:400}
+.dtbl td{padding:7px 10px;border-bottom:1px solid rgba(29,42,68,.4);color:var(--t2);vertical-align:middle}
+.dtbl tr:last-child td{border:none}
+.dtbl tr:hover td{background:rgba(102,114,255,.04);color:var(--t1)}
+.dtbl td:first-child{color:var(--t1);font-weight:500}
+.pill{display:inline-block;font-size:9px;padding:2px 7px;border-radius:999px;font-weight:500}
+.pok{background:rgba(52,211,153,.15);color:var(--green)}
+.pwarn{background:rgba(255,190,92,.15);color:var(--amber)}
+.pbad{background:rgba(255,77,102,.15);color:var(--red)}
+.pblue{background:rgba(102,114,255,.2);color:var(--blue)}
+.pgray{background:rgba(105,118,153,.2);color:var(--t3)}
+.bt{display:inline-block;font-size:9px;padding:1px 6px;border-radius:999px}
+.b51{background:rgba(19,213,195,.15);color:var(--teal)}
+.bmd{background:rgba(102,114,255,.2);color:var(--blue)}
+.bhl{background:rgba(255,190,92,.15);color:var(--amber)}
+.bbdy{background:rgba(52,211,153,.12);color:var(--green)}
+
+/* ── PROGRESS ROWS ── */
+.prow{margin-bottom:9px}
+.prow-hd{display:flex;justify-content:space-between;font-size:11px;color:var(--t2);margin-bottom:3px}
+.prow-val{color:var(--teal);font-weight:600}
+.ptrack{height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}
+
+/* ── ALERTS ── */
+.aitem{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;border-bottom:1px solid rgba(29,42,68,.4)}
+.aitem:last-child{border:none}
+.adot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.atxt{font-size:11px;color:var(--t2);flex:1;line-height:1.5}
+.atime{font-size:10px;color:var(--t3);white-space:nowrap}
+
+/* ── TIMELINE ── */
+.tlitem{display:flex;gap:10px;padding-bottom:11px;position:relative}
+.tlitem:not(:last-child)::before{content:'';position:absolute;left:5px;top:12px;bottom:0;width:1px;background:var(--border)}
+.tldot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:1px;border:2px solid}
+.tlbody{flex:1}
+.tl-t{font-size:12px;font-weight:500;color:var(--t1)}
+.tl-d{font-size:10px;color:var(--t3);margin-top:1px}
+
+/* ── CHART CONTAINERS ── */
+.chart-box{padding:8px 12px 10px;position:relative}
+.chart-box canvas{max-height:200px}
+.chart-sm canvas{max-height:170px}
+.radar-box{padding:8px 10px;position:relative}
+.radar-box canvas{max-height:220px}
+
+/* ── STAT CELLS ── */
+.srow{display:flex;gap:6px;padding:8px 12px}
+.scell{flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 10px;text-align:center}
+.snum{font-size:18px;font-weight:700}
+.slbl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:12px;font-size:10px;color:var(--t3);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div>
+    <div class="logo">品牌组 BI 数字化大屏</div>
+    <div class="logo-sub">DIGITAL MANAGEMENT BI DASHBOARD V9.0</div>
+  </div>
+  <div class="tabs">
+    <button class="tab on" onclick="sw('s1',this)">战略统筹</button>
+    <button class="tab" onclick="sw('s2',this)">生产效能</button>
+    <button class="tab" onclick="sw('s3',this)">底层技术</button>
+    <button class="tab" onclick="sw('s4',this)">品牌资产</button>
+  </div>
+  <div class="topright">
+    <div class="clkbox" id="clk">🕐 --:--:--</div>
+    <div class="onbox"><span class="greendot"></span>SYSTEM ONLINE</div>
+  </div>
+</header>
+
+<div class="metabar">
+  <span class="mdot"></span>最近刷新：<span id="rfTime">2026-03-31 20:00:00</span>
+  <span class="mdot"></span>竞品监测频率：每 4 小时
+  <span class="mdot"></span>当前模式：<span id="curMode">战略统筹</span>
+</div>
+
+<div class="warnbar">
+  <span class="wtitle">风险预警系统</span>
+  API 配额与隧道心跳状态正常。
+</div>
+
+<div class="screens">
+
+<!-- ══════════ S1: 战略统筹 ══════════ -->
+<div class="screen on" id="s1">
+
+  <!-- ROW 1: 雷达图 | 核心项目看板 | KPI右列 -->
+  <div class="g3" style="align-items:start">
+
+    <!-- 雷达图 -->
+    <div class="pnl">
+      <div class="pnl-hd">第一屏：战略统筹中心（品牌运营视角）</div>
+      <div style="font-size:10px;color:var(--t3);padding:2px 14px 0">点击任一维度可下钻查看 Skill 方案建议</div>
+      <div class="radar-box"><canvas id="radarChart"></canvas></div>
+    </div>
+
+    <!-- 核心项目资产 -->
+    <div class="pnl">
+      <div class="pnl-hd">核心项目资产看板（4 大项目）<span class="pnl-tag">实时</span></div>
+      <div class="proj-grid">
+        <div class="pc ok">
+          <div class="pc-name">51吃瓜</div>
+          <div class="pc-ver">版本：Store_Image_v2.4</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span class="pc-status s-ok">已定稿</span>
+            <span class="greendot" style="width:7px;height:7px"></span>
+          </div>
+          <div class="pc-row"><span class="pc-lbl">VI 覆盖率</span><span class="pc-pct cv">93%</span></div>
+          <div class="pbar"><div class="pfill p-blue" style="width:93%"></div></div>
+          <div class="pc-row"><span class="pc-lbl">品牌连贯性</span><span class="pc-pct cv">91%</span></div>
+          <div class="pbar"><div class="pfill p-blue" style="width:91%"></div></div>
+          <div class="sync ok">✓ 站点同步：已同步最新版</div>
+        </div>
+        <div class="pc warn">
+          <div class="pc-name">每日大赛</div>
+          <div class="pc-ver">版本：Logo_Pack_v1.9</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span class="pc-status s-warn">待优化</span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--amber)"></span>
+          </div>
+          <div class="pc-row"><span class="pc-lbl">VI 覆盖率</span><span class="pc-pct ca">86%</span></div>
+          <div class="pbar"><div class="pfill p-amber" style="width:86%"></div></div>
+          <div class="pc-row"><span class="pc-lbl">品牌连贯性</span><span class="pc-pct ca">83%</span></div>
+          <div class="pbar"><div class="pfill p-amber" style="width:83%"></div></div>
+          <div class="sync ok">✓ 站点同步：已同步最新版</div>
+        </div>
+        <div class="pc bad">
+          <div class="pc-name">黑料网</div>
+          <div class="pc-ver">版本�rVisual_Kit_v1.6</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span class="pc-status s-bad">待优化</span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--red)"></span>
+          </div>
+          <div class="pc-row"><span class="pc-lbl">VI 覆盖率</span><span class="pc-pct cr">79%</span></div>
+          <div class="pbar"><div class="pfill p-red" style="width:79%"></div></div>
+          <div class="pc-row"><span class="pc-lbl">品牌连贯性</span><span class="pc-pct cr">72%</span></div>
+          <div class="pbar"><div class="pfill p-red" style="width:72%"></div></div>
+          <div class="sync mismatch">⚠ 站点同步：发现版本不一致</div>
+        </div>
+        <div class="pc ok">
+          <div class="pc-name">黑料不打烊</div>
+          <div class="pc-ver">版本：Brand_System_v2.1</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span class="pc-status s-ok">已定稿</span>
+            <span class="greendot" style="width:7px;height:7px"></span>
+          </div>
+          <div class="pc-row"><span class="pc-lbl">VI 覆盖率</span><span class="pc-pct cg">95%</span></div>
+          <div class="pbar"><div class="pfill p-green" style="width:95%"></div></div>
+          <div class="pc-row"><span class="pc-lbl">品牌连贯性</span><span class="pc-pct cg">89%</span></div>
+          <div class="pbar"><div class="pfill p-green" style="width:89%"></div></div>
+          <div class="sync ok">✓ 站点同步：已同步最新版</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧 KPI 列 -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="pnl kpi">
+        <div class="lbl">Skill 运行成功率</div>
+        <div class="val cv">92.4%</div>
+        <div class="delta up">+2.3% 较昨日</div>
+      </div>
+      <div class="pnl kpi">
+        <div class="lbl">API 剩余额度</div>
+        <div class="val ca">45%</div>
+        <div class="delta dn">-4.1% 需重点监控</div>
+      </div>
+      <div class="pnl kpi">
+        <div class="lbl">隧道心跳</div>
+        <div class="val cg" style="font-size:26px">在线</div>
+        <div class="sub">实时 · 内网穿透</div>
+      </div>
+      <div class="pnl kpi">
+        <div class="lbl">节省工时</div>
+        <div class="val cv">1260h</div>
+        <div class="delta up">+84h</div>
+        <div class="sub">累计</div>
+      </div>
+    </div>
+
+  </div><!-- /row1 -->
+
+  <!-- ROW 2: 需求类型占比 | 交付时效TAT | 底层技术KPI -->
+  <div class="g3b">
+
+    <!-- 环形图 -->
+    <div class="pnl">
+      <div class="pnl-hd">第二屏：需求类型占比（设计侧）</div>
+      <div class="chart-box chart-sm"><canvas id="donutChart"></canvas></div>
+    </div>
+
+    <!-- 折线图 -->
+    <div class="pnl">
+      <div class="pnl-hd">第二屏：交付时效 TAT（响应 vs 交付）</div>
+      <div class="chart-box" style="padding-top:12px"><canvas id="lineChart" style="max-height:185px"></canvas></div>
+    </div>
+
+    <!-- 底层技术 KPI 2x2 -->
+    <div class="pnl">
+      <div class="pnl-hd">第三屏：底层技术与预警（管理底座）</div>
+      <div class="g2" style="margin:8px 10px 6px;gap:8px">
+        <div class="pnl" style="background:var(--card);border-color:rgba(29,42,68,.5)">
+          <div class="kpi" style="padding:10px 12px">
+            <div class="lbl" style="font-size:9px">平均流转时长</div>
+            <div class="val cv" style="font-size:24px">18.6h</div>
+            <div class="delta up">-1.2h</div>
+            <div class="sub">KPI: 业务流转顺畅度</div>
+          </div>
+        </div>
+        <div class="pnl" style="background:var(--card);border-color:rgba(29,42,68,.5)">
+          <div class="kpi" style="padding:10px 12px">
+            <div class="lbl" style="font-size:9px">今日新增资产</div>
+            <div class="val cg" style="font-size:24px">42</div>
+            <div class="delta up">+8</div>
+            <div class="sub">定稿入库</div>
+          </div>
+        </div>
+        <div class="pnl" style="background:var(--card);border-color:rgba(29,42,68,.5)">
+          <div class="kpi" style="padding:10px 12px">
+            <div class="lbl" style="font-size:9px">今日 Skill 调用</div>
+            <div class="val cb" style="font-size:24px">84</div>
+            <div class="delta up">+14</div>
+            <div class="sub">自动化任务</div>
+          </div>
+        </div>
+        <div class="pnl" style="background:var(--card);border-color:rgba(29,42,68,.5)">
+          <div class="kpi" style="padding:10px 12px">
+            <div class="lbl" style="font-size:9px">隧道状态</div>
+            <div class="val cg" style="font-size:22px">稳定</div>
+            <div class="sub">Tunneling</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /row2 -->
+
+</div><!-- /s1 -->
+
+<!-- ══════════ S2: 生产效能 ══════════ -->
+<div class="screen" id="s2">
+  <div class="g4">
+    <div class="pnl kpi"><div class="lbl">设计需求总量</div><div class="val cb">19</div><div class="delta up">+5 本周</div><div class="sub">进行中 13 / 完成 6</div></div>
+    <div class="pnl kpi"><div class="lbl">准时交付率 OTD</div><div class="val cv">87%</div><div class="delta nu">目标 90%</div></div>
+    <div class="pnl kpi"><div class="lbl">平均交付周期</div><div class="val cg">3.2<span style="font-size:14px">天</span></div><div class="delta up">↓ -0.5天</div></div>
+    <div class="pnl kpi"><div class="lbl">返工率</div><div class="val cr">25%</div><div class="delta dn">↑ 需优化</div><div class="sub">目标 ≤15%</div></div>
+  </div>
+  <div class="g2">
+    <div class="pnl">
+      <div class="pnl-hd">品牌设计需求明细</div>
+      <table class="dtbl" style="margin:4px 0">
+        <thead><tr><th>需求名称</th><th>品牌</th><th>负责人</th><th>状态</th><th>截止</th></tr></thead>
+        <tbody>
+          <tr><td>51吃瓜主视觉Banner</td><td><span class="bt b51">51吃瓜</span></td><td>乔乔</td><td><span class="pill pok">已完成</span></td><td>03-10</td></tr>
+          <tr><td>每日大赛App启动页</td><td><span class="bt bmd">每日大赛</span></td><td>雾岚</td><td><span class="pill pblue">进行中</span></td><td>03-20</td></tr>
+          <tr><td>黑料网品牌规范v2</td><td><span class="bt bhl">黑料网</span></td><td>飞羽</td><td><span class="pill pblue">进行中</span></td><td>03-25</td></tr>
+          <tr><td>黑料不打烊社媒套件</td><td><span class="bt bbdy">黑料不打烊</span></td><td>青灰</td><td><span class="pill pwarn">待处理</span></td><td>03-31</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pnl">
+      <div class="pnl-hd">驳回原因 TOP5</div>
+      <div style="padding:10px 14px">
+        <div class="prow"><div class="prow-hd"><span>需求描述不清</span><span class="prow-val">8次</span></div><div class="ptrack"><div class="pfill p-red" style="width:80%"></div></div></div>
+        <div class="prow"><div class="prow-hd"><span>视觉层级混乱</span><span class="prow-val">5次</span></div><div class="ptrack"><div class="pfill p-amber" style="width:50%"></div></div></div>
+        <div class="prow"><div class="prow-hd"><span>品牌色不规范</span><span class="prow-val">4次</span></div><div class="ptrack"><div class="pfill p-amber" style="width:40%"></div></div></div>
+        <div class="prow"><div class="prow-hd"><span>尺寸不符合</span><span class="prow-val">3次</span></div><div class="ptrack"><div class="pfill p-blue" style="width:30%"></div></div></div>
+        <div class="prow"><div class="prow-hd"><span>文案错误</span><span class="prow-val cr">2次</span></div><div class="ptrack"><div class="pfill" style="width:20%;background:var(--teal)"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ S3: 底层技术 ══════════ -->
+<div class="screen" id="s3">
+  <div class="g4">
+    <div class="pnl kpi"><div class="lbl">需求一次合格率</div><div class="val cb">82%</div><div class="delta nu">运营提需质量</div></div>
+    <div class="pnl kpi"><div class="lbl">平均补充次数</div><div class="val cv">1.3<span style="font-size:14px">次</span></div><div class="delta up">目标 ≤1.5</div></div>
+    <div class="pnl kpi"><div class="lbl">平均评审轮次</div><div class="val ca">2.1<span style="font-size:14px">轮</span></div><div class="delta dn">↑ 需优化</div></div>
+    <div class="pnl kpi"><div class="lbl">立项到上线 Lead Time</div><div class="val cg">5.5<span style="font-size:14px">天</span></div><div class="delta up">目标 ≤7天</div></div>
+  </div>
+  <div class="g2">
+    <div class="pnl">
+      <div class="pnl-hd">本周协同预警</div>
+      <div class="aitem"><div class="adot" style="background:var(--red)"></div><div class="atxt"><b style="color:var(--red)">高风险：</b>需求描述不清导致返工，本周 3 项延期，均延误 1.5 天</div></div>
+      <div class="aitem"><div class="adot" style="background:var(--amber)"></div><div class="atxt"><b style="color:var(--amber)">中风险：</b>设计产能不足，新媒体素材积压，平均等待 2 天</div></div>
+      <div class="aitem"><div class="adot" style="background:var(--green)"></div><div class="atxt"><b style="color:var(--green)">正常：</b>商标注册流程 — 51吃瓜、黑料不打烊审核进行中</div></div>
+    </div>
+    <div class="pnl">
+      <div class="pnl-hd">商标注册明细</div>
+      <table class="dtbl"><thead><tr><th>商标</th><th>品牌</th><th>类别</th><th>状态</th><th>预计完成</th></tr></thead>
+        <tbody>
+          <tr><td>51吃瓜</td><td><span class="bt b51">51吃瓜</span></td><td>第41类</td><td><span class="pill pok">已注册</span></td><td>2025-12-20</td></tr>
+          <tr><td>每日大赛</td><td><span class="bt bmd">每日大赛</span></td><td>第41类</td><td><span class="pill pblue">审核中</span></td><td>2026-04-01</td></tr>
+          <tr><td>黑料网</td><td><span class="bt bhl">黑料网</span></td><td>第38类</td><td><span class="pill pwarn">待提交</span></td><td>2026-06-01</td></tr>
+          <tr><td>黑料不打烊</td><td><span class="bt bbdy">黑料不打烊</span></td><td>第41类</td><td><span class="pill pwarn">待提交</span></td><td>2026-06-01</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ S4: 品牌资产 ══════════ -->
+<div class="screen" id="s4">
+  <div class="g4">
+    <div class="pnl kpi"><div class="lbl">51吃瓜</div><div class="val cv" id="bl51">2</div><div class="sub">资料条目</div></div>
+    <div class="pnl kpi"><div class="lbl">每日大赛</div><div class="val cb" id="blmd">1</div><div class="sub">资料条目</div></div>
+    <div class="pnl kpi"><div class="lbl">黑料网</div><div class="val ca" id="blhl">2</div><div class="sub">资料条目</div></div>
+    <div class="pnl kpi"><div class="lbl">黑料不打烊</div><div class="val cg" id="blbdy">1</div><div class="sub">资料条目</div></div>
+  </div>
+  <div class="pnl" style="margin-bottom:10px">
+    <div class="pnl-hd">品牌资料库明细 <span class="pnl-tag">data.json</span></div>
+    <table class="dtbl" id="blTable"><thead><tr><th>资料名称</th><th>品牌</th><th>类型</th><th>格式</th><th>版本</th><th>负责人</th><th>状态</th><th>更新日期</th></tr></thead>
+      <tbody><tr><td colspan="8" style="text-align:center;color:var(--t3);padding:16px">加载中...</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /screens -->
+<div class="footer">品牌组 BI 数字看板 v9.0 · 品宣部 · <span id="fd">2026-03-31</span></div>
+
+<script>
+// ─── 时钟
+(function tick(){
+  const n=new Date(),pad=v=>String(v).padStart(2,'0');
+  document.getElementById('clk').textContent='🕐 '+pad(n.getHours())+':'+pad(n.getMinutes())+':'+pad(n.getSeconds());
+  setTimeout(tick,1000);
+})();
+
+// ─── 标签切换
+const modes={s1:'战略统筹',s2:'生产效能',s3:'底层技术',s4:'品牌资产'};
+function sw(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  document.getElementById('curMode').textContent=modes[id];
+}
+
+// ─── 雷达图
+const rctx=document.getElementById('radarChart').getContext('2d');
+new Chart(rctx,{
+  type:'radar',
+  data:{
+    labels:['品牌活动','视听觉','品牌形象','内容热点','战略布局'],
+    datasets:[
+      {label:'当期',data:[82,88,90,75,85],borderColor:'#6672ff',backgroundColor:'rgba(102,114,255,.15)',pointBackgroundColor:'#6672ff',pointRadius:4,borderWidth:2},
+      {label:'上期',data:[70,78,80,65,75],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.08)',pointBackgroundColor:'#13d5c3',pointRadius:3,borderWidth:1.5,borderDash:[4,4]}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,
+    scales:{r:{
+      grid:{color:'rgba(29,42,68,.8)'},
+      angleLines:{color:'rgba(29,42,68,.8)'},
+      ticks:{display:false,stepSize:20},
+      pointLabels:{color:'#9da8c5',font:{size:11}},
+      min:0,max:100
+    }},
+    plugins:{legend:{labels:{color:'#9da8c5',font:{size:10},boxWidth:10},position:'bottom'}},
+  }
+});
+
+// ─── 环形图
+const dctx=document.getElementById('donutChart').getContext('2d');
+new Chart(dctx,{
+  type:'doughnut',
+  data:{
+    labels:['宣发图','IP 设计','VI 物料','临时任务'],
+    datasets:[{
+      data:[38,27,22,13],
+      backgroundColor:['#6672ff','#13d5c3','#697699','#ffbe5c'],
+      borderWidth:0,hoverOffset:6
+    }]
+  },
+  options:{
+    responsive:true,cutout:'62%',
+    plugins:{
+      legend:{position:'bottom',labels:{color:'s#9da8c5',font:{size:10},boxWidth:10,padding:10}},
+      tooltip:{callbacks:{label:d=>`${d.label}: ${d.raw}%`}}
+    }
+  }
+});
+
+// ─── 抚绿图
+const lctx=document.getElementById('lineChart').getContext('2d');
+new Chart(lctx,{
+
+  type:'line',
+  data:{
+    labels:['周一','周与','周三','周四','周五','周塭','周日'],
+    datasets:[
+      {label:'交付',data:[320,380,900,420,540,360,290],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.08)',tension:.4,pointRadius:4,pointBackgroundColor:'#13d5c3',borderWidth:2,fill:true},
+      {label:'响应',data:[220,250,350,280,310,270,240],borderColor:'#6672ff',backgroundColor:'rgba(102,114,255,.06)',tension:.4,pointRadius:3,pointBackgroundColor:'#6672ff',borderWidth:1.5,fill:true}
+    ]
+  },
+  options:
+
+  {
+    responsive:true,maintainAspectRatio:false,
+    scales:{
+      x:{grid:{color:'rgba(29,42,68,.5)'},ticks:{color:'#697699',font:{size:10}}},
+      y:{grid:{color:'rgba(29,42,68,.5)'},ticks:{color:'s#697699',font:{size:10}},min:0,max:1000}
+    },
+    plugins:
+ 
+    {legend:
+ 
+    {labels:{color:'s#9da8c5',font:{size:10},boxWidth:10},position:'top',align:'end'}}
+  }
+});
+
+// ─── 读取 data.json
+async function loadData(){
+  try{
+    const r=await fetch('data.json');
+    if(!r.ok){return;}
+    const d=await r.json();
+    if(d._meta?.updated){document.getElementById('rfTime').textContent=d._meta.updated;document.getElementById('fd').textContent=d._meta.updated;}
+    const bl=d.brandLib?.rows||[];
+    const bc={};bl.forEach(r=>{const b=r.brand||'?';bc[b]=(bc[b]||0)+1;});
+    const im={'51吃瓜':'bl51','每日大赛':'blmd','黑料网':'blhl','黑料不打烊':'blbdy'};
+    Object.entries(bc).forEach(([b,n])=>{if(im[b])document.getElementById(im[b]).textContent=n;});
+    const pill=s=>{if(!s)return'<span class="pill pgray">—</span>';if(/已完成/i.test(s))return`<span class="pill pok">${s}</span>`;if(/进行中/i.test(s))return`<span class="pill pblue">${s}</span>`;if(/待/i.test(s))return`<span class="pill pwarn">${s}</span>`;return`<span class="pill pgray">${s}</span>`;};
+    const bt=b=>{const m={'51吃瓜':'bt b51','每日大赛':'bt bmd','黑料网':'bt bhl','黑料不打烊':'bt bbdy'};return`<span class="${m[b]||'bt pgray'}">${b}</span>`;};
+    document.querySelector('#blTable tbody').innerHTML=bl.map(r=>`<tr><td>${r.name||'—'}</td><td>${bt(r.brand)}</td><td>${r.type||'—'}</td><td style="font-size:10px;color:var(--t3)">${r.format||'—'}</td><td style="font-size:10px;color:var(--t3)">${r.version||'—'}</td><td>${r.owner||'—'}</td><td>${pill(r.status)}</td><td>${r.updated||'—'}</td></tr>`).join('');
+  }catch(e){console.log('data.json not loaded');}
+}
+loadData();
+</script>
+</body>
+</html>
