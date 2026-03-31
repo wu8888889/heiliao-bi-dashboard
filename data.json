@@ -1,0 +1,306 @@
+{
+  "_meta": {
+    "updated": "2026-03-31",
+    "updatedBy": "品宣部"
+  },
+
+  "brandDesign": {
+    "_sheet": "品牌设计需求表",
+    "columns": ["需求名称", "品牌", "需求类型", "负责人", "状态", "优先级", "提单日期", "截止日期", "实际完成日期", "备注"],
+    "rows": [
+      {
+        "name": "51吃瓜主视觉Banner设计",
+        "brand": "51吃瓜",
+        "type": "Banner",
+        "owner": "乔乔",
+        "status": "已完成",
+        "priority": "高",
+        "created": "2026-03-01",
+        "deadline": "2026-03-10",
+        "completedAt": "2026-03-09",
+        "note": ""
+      },
+      {
+        "name": "每日大赛App启动页设计",
+        "brand": "每日大赛",
+        "type": "App界面",
+        "owner": "雾岚",
+        "status": "进行中",
+        "priority": "高",
+        "created": "2026-03-05",
+        "deadline": "2026-03-20",
+        "completedAt": "",
+        "note": "等待产品确认交互稿"
+      },
+      {
+        "name": "黑料网品牌规范文档v2",
+        "brand": "黑料网",
+        "type": "规范文档",
+        "owner": "飞羽",
+        "status": "进行中",
+        "priority": "中",
+        "created": "2026-03-10",
+        "deadline": "2026-03-25",
+        "completedAt": "",
+        "note": ""
+      },
+      {
+        "name": "黑料不打烊社媒模板套件",
+        "brand": "黑料不打烊",
+        "type": "社媒素材",
+        "owner": "青灰",
+        "status": "待处理",
+        "priority": "中",
+        "created": "2026-03-15",
+        "deadline": "2026-03-31",
+        "completedAt": "",
+        "note": ""
+      }
+    ]
+  },
+
+  "videoEdit": {
+    "_sheet": "原创视频剪辑需求表",
+    "columns": ["视频名称", "品牌", "视频类型", "负责人", "状态", "时长(秒)", "提单日期", "截止日期", "实际完成日期", "备注"],
+    "rows": [
+      {
+        "name": "51吃瓜3月品牌宣传片",
+        "brand": "51吃瓜",
+        "type": "品牌宣传",
+        "owner": "肖田",
+        "status": "已完成",
+        "duration": 60,
+        "created": "2026-03-01",
+        "deadline": "2026-03-15",
+        "completedAt": "2026-03-14",
+        "note": ""
+      },
+      {
+        "name": "每日大赛活动预热视频",
+        "brand": "每日大赛",
+        "type": "活动预热",
+        "owner": "肖田",
+        "status": "进行中",
+        "duration": 30,
+        "created": "2026-03-10",
+        "deadline": "2026-03-28",
+        "completedAt": "",
+        "note": "素材已到位"
+      },
+      {
+        "name": "黑料网用户故事短片",
+        "brand": "黑料网",
+        "type": "用户故事",
+        "owner": "肖田",
+        "status": "待处理",
+        "duration": 90,
+        "created": "2026-03-18",
+        "deadline": "2026-04-05",
+        "completedAt": "",
+        "note": ""
+      }
+    ]
+  },
+
+  "trademark": {
+    "_sheet": "品牌商标注册表",
+    "columns": ["商标名称", "品牌", "商标类别", "注册类型", "代理机构", "状态", "申请日期", "预计完成", "实际完成", "申请号", "备注"],
+    "rows": [
+      {
+        "name": "51吃瓜",
+        "brand": "51吃瓜",
+        "category": "第41类",
+        "type": "文字商标",
+        "agency": "XX知识产权",
+        "status": "已注册",
+        "applied": "2025-06-01",
+        "estimated": "2026-01-01",
+        "completed": "2025-12-20",
+        "appNumber": "XXXXXXXX",
+        "note": ""
+      },
+      {
+        "name": "每日大赛",
+        "brand": "每日大赛",
+        "category": "第41类",
+        "type": "文字商标",
+        "agency": "XX知识产权",
+        "status": "审核中",
+        "applied": "2025-09-01",
+        "estimated": "2026-04-01",
+        "completed": "",
+        "appNumber": "XXXXXXXX",
+        "note": "已进入实质审查阶段"
+      },
+      {
+        "name": "黑料网",
+        "brand": "黑料网",
+        "category": "第38类",
+        "type": "文字+图形",
+        "agency": "XX知识产权",
+        "status": "待提交",
+        "applied": "",
+        "estimated": "2026-06-01",
+        "completed": "",
+        "appNumber": "",
+        "note": "材料准备中"
+      },
+      {
+        "name": "黑料不打烊",
+        "brand": "黑料不打烊",
+        "category": "第41类",
+        "type": "文字商标",
+        "agency": "XX知识产权",
+        "status": "待提交",
+        "applied": "",
+        "estimated": "2026-06-01",
+        "completed": "",
+        "appNumber": "",
+        "note": ""
+      },
+      {
+        "name": "51吃瓜图形LOGO",
+        "brand": "51吃瓜",
+        "category": "第41类",
+        "type": "图形商标",
+        "agency": "XX知识产权",
+        "status": "审核中",
+        "applied": "2025-10-01",
+        "estimated": "2026-05-01",
+        "completed": "",
+        "appNumber": "XXXXXXXX",
+        "note": ""
+      }
+    ]
+  },
+
+  "brandLib": {
+    "_sheet": "品牌资料库（4品牌分表）",
+    "columns": ["资料名称", "品牌", "资料类型", "文件格式", "版本", "负责人", "状态", "更新日期", "存储位置", "备注"],
+    "rows": [
+      {
+        "name": "51吃瓜品牌VI手册",
+        "brand": "51吃瓜",
+        "type": "VI规范",
+        "format": "PDF",
+        "version": "v2.1",
+        "owner": "乔乔",
+        "status": "已完成",
+        "updated": "2026-02-15",
+        "location": "Google Drive/品牌资料/51吃瓜",
+        "note": ""
+      },
+      {
+        "name": "51吃瓜主LOGO源文件",
+        "brand": "51吃瓜",
+        "type": "LOGO",
+        "format": "AI/SVG",
+        "version": "v3.0",
+        "owner": "乔乔",
+        "status": "已完成",
+        "updated": "2026-01-10",
+        "location": "Google Drive/品牌资料/51吃瓜",
+        "note": ""
+      },
+      {
+        "name": "每日大赛品牌色彩规范",
+        "brand": "每日大赛",
+        "type": "VI规范",
+        "format": "PDF",
+        "version": "v1.2",
+        "owner": "雾岚",
+        "status": "进行中",
+        "updated": "2026-03-01",
+        "location": "Google Drive/品牌资料/每日大赛",
+        "note": "更新品牌主色"
+      },
+      {
+        "name": "黑料网IP形象设定集",
+        "brand": "黑料网",
+        "type": "IP形象",
+        "format": "PDF/AI",
+        "version": "v1.0",
+        "owner": "飞羽",
+        "status": "已完成",
+        "updated": "2026-02-28",
+        "location": "Google Drive/品牌资料/黑料网",
+        "note": ""
+      },
+      {
+        "name": "黑料网LOGO源文件",
+        "brand": "黑料网",
+        "type": "LOGO",
+        "format": "AI/SVG",
+        "version": "v2.0",
+        "owner": "飞羽",
+        "status": "已完成",
+        "updated": "2026-01-20",
+        "location": "Google Drive/品牌资料/黑料网",
+        "note": ""
+      },
+      {
+        "name": "黑料不打烊品牌手册",
+        "brand": "黑料不打烊",
+        "type": "VI规范",
+        "format": "PDF",
+        "version": "v1.0",
+        "owner": "青灰",
+        "status": "待处理",
+        "updated": "",
+        "location": "",
+        "note": "尚未启动"
+      }
+    ]
+  },
+
+  "designDocs": {
+    "_sheet": "设计文档索引",
+    "items": [
+      {
+        "title": "IP形象设计",
+        "id": "doc-ip",
+        "url": "https://docs.google.com/document/d/1uqbDFLwCewoxY4hK57S2cNAWZ1NZ_PgbGME5PKp4NXk",
+        "summary": "四大品牌IP形象设计规范，包含角色设定、表情包规范、应用场景说明。",
+        "status": "进行中",
+        "owner": "乔乔",
+        "updated": "2026-03-20"
+      },
+      {
+        "title": "图形Logo设计",
+        "id": "doc-logo",
+        "url": "https://docs.google.com/document/d/1NvteFZnCMIuAB07yAjZxH2pLPVbiOzLvZr7cAJFu4f4",
+        "summary": "各品牌图形Logo设计说明，包含设计理念、标准色、使用规范、禁止用法。",
+        "status": "已完成",
+        "owner": "飞羽",
+        "updated": "2026-03-15"
+      },
+      {
+        "title": "App首页+内容页优化",
+        "id": "doc-app",
+        "url": "https://docs.google.com/document/d/1V6wAxyTdA7tcAfC9AVwA2ZMDSe90zLF-FpohVDNdRl0",
+        "summary": "App视觉优化方案，涵盖首页信息架构、内容页排版、组件规范、交互说明。",
+        "status": "进行中",
+        "owner": "雾岚",
+        "updated": "2026-03-25"
+      },
+      {
+        "title": "Web端框架视觉优化",
+        "id": "doc-web",
+        "url": "https://docs.google.com/document/d/17SqEnKeGRWxyvKzPc-FPJrd_A5DbRcJzZAFnS1Icawc",
+        "summary": "Web端整体视觉框架升级方案，包含页面结构、导航设计、响应式规范。",
+        "status": "待处理",
+        "owner": "青灰",
+        "updated": "2026-03-10"
+      },
+      {
+        "title": "品宣部BI看板规范",
+        "id": "doc-bi",
+        "url": "https://docs.google.com/document/d/1FMK3DHDThYs35vR6NmFl8_N8pj0MDizSZrMDtMrb6kc",
+        "summary": "品宣部BI看板数据字典、指标定义、更新频率规范、权限说明文档。",
+        "status": "已完成",
+        "owner": "飞羽",
+        "updated": "2026-03-28"
+      }
+    ]
+  }
+}
